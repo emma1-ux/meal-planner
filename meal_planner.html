@@ -3,15 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Meal Planner — Emma &amp; Seth</title>
+<title>Meal Planner — Emma</title>
 <style>
-
 :root{--bg:#faf9f7;--surface:#fff;--surface-2:#f4f3f0;--border:#e8e6e1;--border-strong:#c8c5be;--text:#1a1916;--text-2:#5a5750;--text-muted:#9a978f;--accent:#2d6a4f;--accent-light:#eaf4ee;--accent-border:#a8d5b8;--warn-bg:#fef9ec;--warn:#92660a;--danger-bg:#fdf1f1;--danger:#c0392b;--success-bg:#eaf4ee;--success:#2d6a4f;--gold:#e8a020;--radius:8px;--radius-lg:12px;--font:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;line-height:1.5;}
 .app-header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:52px;position:sticky;top:0;z-index:50;}
-.app-header h1{font-size:15px;font-weight:600;}
-.subtitle{font-size:12px;color:var(--text-muted);margin-left:8px;}
+.app-header h1{font-size:15px;font-weight:600;}.subtitle{font-size:12px;color:var(--text-muted);margin-left:8px;}
 .nav-tabs{display:flex;gap:2px;background:var(--surface-2);border-radius:var(--radius);padding:3px;}
 .nav-tab{padding:5px 12px;font-size:13px;font-weight:500;border-radius:6px;cursor:pointer;color:var(--text-2);border:none;background:none;font-family:var(--font);transition:all .15s;}
 .nav-tab.active{background:var(--surface);color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,.08);}
@@ -65,8 +63,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent);box-shadow:0 
 .modal{background:var(--surface);border-radius:16px;border:1px solid var(--border);padding:20px;width:100%;max-width:560px;box-shadow:0 8px 40px rgba(0,0,0,.12);}
 .modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}.modal-header h2{font-size:16px;font-weight:600;}
 .star-input{display:flex;gap:4px;margin-top:4px;}.star-input .star{font-size:22px;}
-.person-toggle{display:flex;border:1px solid var(--border-strong);border-radius:var(--radius);overflow:hidden;}
-.person-btn{padding:7px 20px;font-size:13px;font-weight:500;cursor:pointer;background:none;border:none;color:var(--text-2);font-family:var(--font);}.person-btn.active{background:var(--text);color:#fff;}
 .toolbar-row{display:flex;gap:8px;align-items:center;margin-bottom:16px;flex-wrap:wrap;}
 .goals-bar{display:flex;gap:12px;align-items:center;background:var(--accent-light);border:1px solid var(--accent-border);border-radius:var(--radius);padding:8px 14px;margin-bottom:16px;font-size:12px;color:var(--accent);flex-wrap:wrap;}
 .cal-wrap{overflow-x:auto;}
@@ -76,6 +72,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent);box-shadow:0 
 .cal-cell{border:1px solid var(--border);border-radius:var(--radius);padding:5px 6px;min-height:54px;background:var(--surface);cursor:pointer;transition:border-color .1s;}.cal-cell:hover{border-color:var(--border-strong);}
 .cal-cell.has-main{background:var(--accent-light);border-color:var(--accent-border);}.cal-cell.skipped{background:var(--surface-2);}
 .main-name{font-size:9.5px;color:var(--accent);font-weight:600;line-height:1.3;}
+.sides-note{font-size:9px;color:var(--text-muted);font-style:italic;line-height:1.3;margin-top:2px;}
 .side-div{border-top:1px solid var(--accent-border);margin:3px 0;}
 .skip-label{font-size:9px;color:var(--text-muted);font-style:italic;}.add-hint{font-size:18px;color:var(--border-strong);text-align:center;margin-top:8px;}
 .summary-grid{display:grid;grid-template-columns:76px repeat(7,1fr);gap:3px;min-width:560px;margin-top:4px;}
@@ -126,14 +123,13 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent);box-shadow:0 
 .meal-summary-group{border:1px solid;border-radius:var(--radius-lg);padding:10px 14px;flex:1;min-width:140px;}
 .meal-summary-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;}
 .meal-summary-item{font-size:12px;padding:2px 0;opacity:.85;}
+@keyframes spin{to{transform:rotate(360deg);}}
 @media(max-width:600px){.form-grid,.form-grid-3{grid-template-columns:1fr;}.form-grid-5{grid-template-columns:repeat(3,1fr);}.macros{grid-template-columns:repeat(3,1fr);}}
-
 </style>
 </head>
 <body>
-
 <header class="app-header">
-  <div style="display:flex;align-items:center"><h1>Meal Planner</h1><span class="subtitle">Emma &amp; Seth</span></div>
+  <div style="display:flex;align-items:center"><h1>Meal Planner</h1><span class="subtitle">Emma</span></div>
   <div class="nav-tabs">
     <button class="nav-tab active" onclick="showPage('recipes')">Recipes</button>
     <button class="nav-tab" onclick="showPage('planner')">Planner</button>
@@ -178,19 +174,18 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent);box-shadow:0 
 </div>
 
 <div class="page" id="page-planner">
-  <div class="section-header"><div><div class="section-title">Weekly calendar</div><div class="section-sub">Plan Emma and Seth's meals.</div></div></div>
+  <div class="section-header"><div><div class="section-title">Weekly calendar</div><div class="section-sub">Plan Emma's meals for the week.</div></div></div>
   <div class="toolbar-row">
-    <div class="person-toggle">
-      <button class="person-btn active" id="btn-emma" onclick="setPerson('emma')">Emma</button>
-      <button class="person-btn" id="btn-seth" onclick="setPerson('seth')">Seth</button>
-    </div>
-    <button class="btn btn-ghost" onclick="copyEmmaToSeth()">Copy Emma to Seth</button>
-    <button class="btn btn-primary" id="autofill-btn" onclick="autoFill()">Auto-fill Emma</button>
+    <button class="btn btn-primary" id="autofill-btn" onclick="autoFill()">Auto-fill week</button>
     <button class="btn btn-ghost" onclick="clearCal()">Clear</button>
   </div>
-  <div id="emma-goals-bar" class="goals-bar">
+  <div id="autofill-progress" style="display:none;background:var(--accent-light);border:1px solid var(--accent-border);border-radius:var(--radius);padding:10px 14px;margin-bottom:16px;font-size:13px;color:var(--accent);display:flex;align-items:center;gap:10px">
+    <div style="width:14px;height:14px;border:2px solid var(--accent);border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;flex-shrink:0"></div>
+    <span id="autofill-progress-text">Working...</span>
+  </div>
+  <div class="goals-bar">
     <strong>Emma's goals:</strong>
-    <span>1700-1900 kcal &middot; 90g+ protein &middot; 15g+ fiber</span>
+    <span id="goals-display">1700-1900 kcal &middot; 90g+ protein &middot; 15g+ fiber</span>
     <span style="opacity:.7;font-size:11px">&middot; Green=met &middot; Yellow=within 100cal &middot; Red=missed</span>
   </div>
   <div class="cal-wrap">
@@ -203,7 +198,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent);box-shadow:0 
 
 <div class="page" id="page-grocery">
   <div class="section-header">
-    <div><div class="section-title">Grocery list</div><div class="section-sub">Scaled by batches. Combined from Emma + Seth.</div></div>
+    <div><div class="section-title">Grocery list</div><div class="section-sub">Scaled by batches needed.</div></div>
     <div style="display:flex;gap:8px">
       <button class="btn btn-ghost" onclick="buildGrocery()">Rebuild</button>
       <button class="btn btn-ghost" onclick="copyForSheets()">Copy for Sheets</button>
@@ -239,15 +234,15 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent);box-shadow:0 
   <div id="prep-recipes-summary" style="display:none;margin-bottom:16px"></div>
   <div id="prep-loading" style="display:none;text-align:center;padding:32px;color:var(--text-muted)"><div style="font-size:24px;margin-bottom:8px">&#8987;</div><div>Planning your prep day...</div></div>
   <div id="prep-result"></div>
-  <div class="empty" id="prep-empty"><div class="empty-icon">&#129368;</div><div>Fill out your weekly calendar first, then generate a prep plan.</div></div>
+  <div class="empty" id="prep-empty"><div class="empty-icon">&#129368;</div><div>Fill out your weekly calendar first.</div></div>
 </div>
 
 <div class="page" id="page-settings">
-  <div class="section-header"><div><div class="section-title">Settings</div><div class="section-sub">API key and app preferences.</div></div></div>
+  <div class="section-header"><div><div class="section-title">Settings</div><div class="section-sub">API key, nutrition goals, and app preferences.</div></div></div>
   <div class="card">
     <div class="settings-section">
       <h3>Anthropic API key</h3>
-      <p>Enables recipe parsing, nutrition recalculation, and meal prep planning. Get your key at <a href="https://console.anthropic.com" target="_blank" style="color:var(--accent)">console.anthropic.com</a>. Stored only in your browser.</p>
+      <p>Enables recipe parsing, nutrition recalculation, side suggestions, and meal prep planning. Get your key at <a href="https://console.anthropic.com" target="_blank" style="color:var(--accent)">console.anthropic.com</a>. Stored only in your browser.</p>
       <div id="key-status" class="key-status unset">No API key set</div>
       <div class="field"><div class="field-label">API Key</div><input type="password" id="api-key-input" placeholder="sk-ant-..."></div>
       <div style="display:flex;gap:8px;margin-top:4px">
@@ -258,8 +253,21 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent);box-shadow:0 
     </div>
     <hr style="border:none;border-top:1px solid var(--border);margin:20px 0">
     <div class="settings-section">
+      <h3>Emma's nutrition goals</h3>
+      <p>Used for calendar color coding and side portion suggestions.</p>
+      <div class="form-grid" style="margin-bottom:10px">
+        <div><div class="field-label">Min calories / day</div><input type="number" id="g-cal-low" placeholder="1700"></div>
+        <div><div class="field-label">Max calories / day</div><input type="number" id="g-cal-high" placeholder="1900"></div>
+        <div><div class="field-label">Protein goal (g)</div><input type="number" id="g-protein" placeholder="90"></div>
+        <div><div class="field-label">Fiber goal (g)</div><input type="number" id="g-fiber" placeholder="15"></div>
+      </div>
+      <button class="btn btn-primary" onclick="saveGoals()">Save goals</button>
+      <span class="saved-flash" id="goals-saved" style="margin-left:10px">Saved</span>
+    </div>
+    <hr style="border:none;border-top:1px solid var(--border);margin:20px 0">
+    <div class="settings-section">
       <h3>Export data for kitchen screen</h3>
-      <p>Downloads a <strong>meal_data.json</strong> file. Save it in the same folder as your HTML files so the kitchen screen can load it.</p>
+      <p>Downloads a <strong>meal_data.json</strong> file. Upload to GitHub so the kitchen screen can load it.</p>
       <button class="btn btn-primary" onclick="exportData()">Export meal_data.json</button>
       <span class="saved-flash" id="export-flash" style="margin-left:10px">Exported!</span>
     </div>
@@ -305,6 +313,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent);box-shadow:0 
       <div class="field"><div class="field-label">Source</div><input type="text" id="f-source" placeholder="NYT Cooking, Instagram..."></div>
       <div class="field"><div class="field-label">Source URL</div><input type="text" id="f-url" placeholder="https://..."></div>
     </div>
+    <div class="field"><div class="field-label">Suggested pairings <span style="color:var(--text-muted);font-weight:400">(sides that go well with this recipe)</span></div><input type="text" id="f-pairings" placeholder="e.g. rice, black beans, guacamole, roasted corn..."></div>
     <div class="field"><div class="field-label">Rating</div><div class="star-input" id="f-stars"><span class="star" onclick="setStarForm(1)">&#9734;</span><span class="star" onclick="setStarForm(2)">&#9734;</span><span class="star" onclick="setStarForm(3)">&#9734;</span><span class="star" onclick="setStarForm(4)">&#9734;</span><span class="star" onclick="setStarForm(5)">&#9734;</span></div></div>
     <div class="field">
       <div class="field-label">Ingredients</div>
@@ -320,7 +329,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent);box-shadow:0 
     </div>
   </div>
 </div>
-
 <script>
 const DEFAULTS = [
   {id:1,name:"Grilled Chicken & Corn Peach Salad",meal_type:"dinner",servings:2,prep_time:"10 min",cook_time:"15 min",macros_per_serving:{calories:520,protein_g:38,fiber_g:5,carbs_g:32,fat_g:26},source:"Instagram",source_url:"",rating:0,instructions:"1. Season chicken thighs with chili oil, hot honey, smoked paprika, cumin, garlic powder, chili powder, salt and pepper.\n2. Broil at 500°F for 10–15 minutes.\n3. Combine corn, peach, red onion, cilantro, jalapeño, and avocado.\n4. Dress salad with lime juice, hot honey, salt and pepper.\n5. Serve chicken alongside or over the salad.",tags:[],mark_new:false,added_at:new Date(Date.now()-20*864e5).toISOString(),ingredients:[{amount:"2-3",unit:"",item:"chicken thighs"},{amount:"1",unit:"cob",item:"corn"},{amount:"1/2",unit:"",item:"peach"},{amount:"1/8",unit:"cup",item:"red onion"},{amount:"1/4",unit:"cup",item:"cilantro"},{amount:"1/2",unit:"",item:"jalapeño"},{amount:"1/2",unit:"",item:"avocado"},{amount:"1",unit:"",item:"lime"},{amount:"1",unit:"drizzle",item:"hot honey"},{amount:"1",unit:"tsp",item:"chili oil"},{amount:"1/2",unit:"tsp",item:"smoked paprika"},{amount:"1/2",unit:"tsp",item:"cumin"},{amount:"1/2",unit:"tsp",item:"garlic powder"},{amount:"1/2",unit:"tsp",item:"chili powder"},{amount:"",unit:"to taste",item:"salt & pepper"}]},
@@ -585,7 +593,8 @@ function saveRecipe(){
   var name=document.getElementById('f-name').value.trim();
   if(!name){alert('Please enter a recipe name.');return;}
   var ingredients=Array.from(document.querySelectorAll('#ing-fields .ing-row')).map(function(row){var inputs=row.querySelectorAll('input');return{amount:inputs[0].value.trim(),unit:inputs[1].value.trim(),item:inputs[2].value.trim()};}).filter(function(i){return i.item;});
-  var r={id:editingId||Date.now(),name:name,meal_type:document.getElementById('f-type').value,servings:parseInt(document.getElementById('f-servings').value)||2,prep_time:document.getElementById('f-prep').value||'15 min',cook_time:document.getElementById('f-cook').value||'20 min',macros_per_serving:{calories:parseInt(document.getElementById('f-cal').value)||0,protein_g:parseInt(document.getElementById('f-pro').value)||0,fiber_g:parseInt(document.getElementById('f-fiber').value)||0,carbs_g:parseInt(document.getElementById('f-carb').value)||0,fat_g:parseInt(document.getElementById('f-fat').value)||0},source:document.getElementById('f-source').value.trim(),source_url:document.getElementById('f-url').value.trim(),rating:formStarVal,instructions:document.getElementById('f-instructions').value.trim(),tags:document.getElementById('f-tags').value.split(',').map(function(t){return t.trim();}).filter(Boolean),mark_new:document.getElementById('f-new').checked,added_at:editingId?(recipes.find(function(x){return x.id===editingId;})||{}).added_at||new Date().toISOString():new Date().toISOString(),ingredients:ingredients};
+  var r={id:editingId||Date.now(),name:name,meal_type:document.getElementById('f-type').value,servings:parseInt(document.getElementById('f-servings').value)||2,prep_time:document.getElementById('f-prep').value||'15 min',cook_time:document.getElementById('f-cook').value||'20 min',macros_per_serving:{calories:parseInt(document.getElementById('f-cal').value)||0,protein_g:parseInt(document.getElementById('f-pro').value)||0,fiber_g:parseInt(document.getElementById('f-fiber').value)||0,carbs_g:parseInt(document.getElementById('f-carb').value)||0,fat_g:parseInt(document.getElementById('f-fat').value)||0},source:document.getElementById('f-source').value.trim(),source_url:document.getElementById('f-url').value.trim(),rating:formStarVal,instructions:document.getElementById('f-instructions').value.trim(),tags:document.getElementById('f-tags').value.split(',').map(function(t){return t.trim();}).filter(Boolean),
+    pairings:(document.getElementById('f-pairings')?document.getElementById('f-pairings').value.trim():''),mark_new:document.getElementById('f-new').checked,added_at:editingId?(recipes.find(function(x){return x.id===editingId;})||{}).added_at||new Date().toISOString():new Date().toISOString(),ingredients:ingredients};
   if(editingId) recipes=recipes.map(function(x){return x.id===editingId?r:x;}); else recipes.push(r);
   saveRecipes();closeModal();renderRecipes();
 }
@@ -593,14 +602,15 @@ function editRecipe(id){var r=recipes.find(function(r){return r.id===id;});if(r)
 function deleteRecipe(id){
   if(!confirm('Remove this recipe?')) return;
   recipes=recipes.filter(function(r){return r.id!==id;});
-  ['emma','seth'].forEach(function(p){Object.keys(calData[p]).forEach(function(k){var e=calData[p][k];if(!e)return;if(e.ids) e.ids=e.ids.filter(function(i){return i!==id;});});});
+  Object.keys(calData.emma).forEach(function(k){var e=calData.emma[k];if(!e)return;if(e.ids) e.ids=e.ids.filter(function(i){return i!==id;});});
   saveRecipes();saveCal();renderRecipes();
 }
 
 // CALENDAR
 var DAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
 var MEALS=['Breakfast','Lunch','Dinner','Snack'];
-var EMMA={calLow:1700,calHigh:1900,calYellow:100,protein:90,fiber:15};
+var EMMA_GOALS=LS.get('mp_goals',{calLow:1700,calHigh:1900,protein:90,fiber:15});
+var EMMA=Object.assign({calYellow:100},EMMA_GOALS);
 var activePerson='emma', activeCell=null;
 
 function getR(id){return recipes.find(function(r){return r.id===id;});}
@@ -608,8 +618,7 @@ function getSlotIds(e){if(!e)return [];if(e.ids)return e.ids;var ids=[];if(e.mai
 
 function setPerson(p){
   activePerson=p;
-  document.getElementById('btn-emma').classList.toggle('active',p==='emma');
-  document.getElementById('btn-seth').classList.toggle('active',p==='seth');
+  document.getElementById('btn-emma') && document.getElementById('btn-emma').classList.toggle('active',p==='emma');
   document.getElementById('autofill-btn').style.display=p==='emma'?'inline-flex':'none';
   document.getElementById('emma-goals-bar').style.display=p==='emma'?'flex':'none';
   closePicker();renderCalendar();
@@ -630,7 +639,7 @@ function goalColor(v,t){if(v>=t)return 'green';if(v>=t*0.85)return 'yellow';retu
 function worstColor(arr){var rank={green:0,yellow:1,red:2};return arr.slice().sort(function(a,b){return rank[b]-rank[a];})[0];}
 
 function renderCalendar(){
-  var cal=calData[activePerson];var isEmma=activePerson==='emma';
+  var cal=calData.emma;var isEmma=true;
   var html='<div></div>'+DAYS.map(function(d){return '<div class="cal-day-header">'+d+'</div>';}).join('');
   MEALS.forEach(function(meal){
     html+='<div class="cal-row-label"><span class="meal-badge" style="font-size:9px">'+meal+'</span></div>';
@@ -643,12 +652,17 @@ function renderCalendar(){
       var cls='cal-cell'+(hasItems?' has-main':'')+(e.skip?' skipped':'');
       html+='<div class="'+cls+'" data-key="'+key+'">';
       if(e.skip){html+='<div class="skip-label">Skipped</div>';}
-      else if(hasItems){html+=slotRecipes.map(function(r,i){return (i>0?'<div class="side-div"></div>':'')+'<div class="main-name">'+r.name+'</div>';}).join('');}
+      else if(hasItems){
+        html+=slotRecipes.map(function(r,i){return (i>0?'<div class="side-div"></div>':'')+'<div class="main-name">'+r.name+'</div>';}).join('');
+        if(e.sidesNote) html+='<div class="sides-note">+ '+e.sidesNote+'</div>';
+      }
       else{html+='<div class="add-hint">+</div>';}
       html+='</div>';
     });
   });
-  document.getElementById('cal-grid').innerHTML=html;
+  var calGridEl=document.getElementById('cal-grid');
+  calGridEl.innerHTML=html;
+  void calGridEl.offsetHeight; // force reflow so grid row heights recalc immediately
   // Attach click handlers via event delegation
   document.getElementById('cal-grid').onclick=function(e){
     var cell=e.target.closest('[data-key]');
@@ -656,7 +670,7 @@ function renderCalendar(){
   };
   var shtml='<div class="summary-label">Totals</div>';
   DAYS.forEach(function(day){
-    var m=dayMacros(activePerson,day);
+    var m=dayMacros('emma',day);
     if(m.cal===0&&m.pro===0){shtml+='<div class="summary-cell neutral">&mdash;</div>';return;}
     if(isEmma){var overall=worstColor([calColor(m.cal),goalColor(m.pro,EMMA.protein),goalColor(m.fib,EMMA.fiber)]);shtml+='<div class="summary-cell '+overall+'"><div class="sv">'+m.cal+'</div><div>'+m.pro+'g P</div><div>'+m.fib+'g F</div></div>';}
     else{shtml+='<div class="summary-cell neutral"><div class="sv">'+m.cal+'</div><div>'+m.pro+'g P</div></div>';}
@@ -669,14 +683,16 @@ function openPicker(key){
   var picker=document.getElementById('cal-picker');
   if(activeCell===key&&picker.classList.contains('open')){closePicker();return;}
   activeCell=key;
-  var e=calData[activePerson][key]||{};
+  var e=calData.emma[key]||{};
   var currentIds=getSlotIds(e);
   var parts=key.split('-');var day=parts[0];var meal=parts[1];
   var mealLower=meal.toLowerCase();
   var html='<div class="picker-label">'+day+' '+meal+' &mdash; tap to add or remove</div>';
+  if(e.sidesNote) html+='<div style="font-size:12px;color:var(--accent);background:var(--accent-light);border-radius:6px;padding:6px 8px;margin-bottom:8px">Sides: '+e.sidesNote+' <span data-action="clear-sides" data-key="'+key+'" style="cursor:pointer;color:var(--danger);text-decoration:underline;margin-left:6px">remove</span></div>';
   html+='<div class="picker-section">Actions</div>';
   html+='<div class="picker-opt picker-muted" data-action="skip" data-key="'+key+'">Skip &mdash; eating out / work lunch</div>';
   if(e.skip||currentIds.length>0) html+='<div class="picker-opt picker-danger" data-action="clear" data-key="'+key+'">Clear this meal</div>';
+  if(currentIds.length>0) html+='<div class="picker-opt" data-action="suggest" data-day="'+day+'" data-meal="'+meal+'" style="color:var(--accent);font-weight:500">Suggest sides &amp; portions</div>';
   if(recipes.length){
     var sorted=recipes.slice().sort(function(a,b){var am=a.meal_type===mealLower,bm=b.meal_type===mealLower;if(am&&!bm)return -1;if(!am&&bm)return 1;return a.name.localeCompare(b.name);});
     var matchCount=sorted.filter(function(r){return r.meal_type===mealLower;}).length;
@@ -698,40 +714,136 @@ function openPicker(key){
     if(action==='skip') setSkip(k);
     else if(action==='clear') clearEntry(k);
     else if(action==='toggle') toggleMealItem(k,parseInt(opt.getAttribute('data-rid')));
+    else if(action==='suggest'){var dd=opt.getAttribute('data-day');var mm=opt.getAttribute('data-meal');closePicker();showSidesPanel(dd,mm);}
+    else if(action==='clear-sides'){if(calData.emma[k]){delete calData.emma[k].sidesNote;saveCal();renderCalendar();openPicker(k);}}
   };
   picker.classList.add('open');
 }
 
 function toggleMealItem(key,rid){
-  if(!calData[activePerson][key]) calData[activePerson][key]={ids:[],skip:false};
-  var e=calData[activePerson][key];
+  if(!calData.emma[key]) calData.emma[key]={ids:[],skip:false};
+  var e=calData.emma[key];
   if(!e.ids){e.ids=getSlotIds(e);delete e.mainId;delete e.sideId;}
   e.skip=false;
   var idx=e.ids.indexOf(rid);
   if(idx===-1) e.ids.push(rid); else e.ids.splice(idx,1);
   saveCal();openPicker(key);renderCalendar();
 }
-function setSkip(key){calData[activePerson][key]={ids:[],skip:true};saveCal();closePicker();renderCalendar();}
-function clearEntry(key){delete calData[activePerson][key];saveCal();closePicker();renderCalendar();}
-function clearCal(){if(!confirm('Clear '+(activePerson==='emma'?'Emma':'Seth')+"'s calendar?"))return;calData[activePerson]={};saveCal();renderCalendar();}
-function copyEmmaToSeth(){if(!confirm("Copy Emma's meals to Seth? Overwrites Seth's calendar."))return;calData.seth=JSON.parse(JSON.stringify(calData.emma));saveCal();setPerson('seth');}
+function setSkip(key){calData.emma[key]={ids:[],skip:true};saveCal();closePicker();renderCalendar();}
+function clearEntry(key){delete calData.emma[key];saveCal();closePicker();renderCalendar();}
+function clearCal(){if(!confirm("Clear Emma's calendar?"))return;calData.emma={};saveCal();renderCalendar();}
 
-function autoFill(){
+
+async function autoFill(){
   var eligible=recipes.filter(function(r){return r.meal_type!=='side';});
   if(eligible.length<3){alert('Add more recipes first.');return;}
+  var apiKey=getApiKey();
+
   var usage={};eligible.forEach(function(r){usage[r.id]=0;});
   calData.emma={};
   var calMid=(EMMA.calLow+EMMA.calHigh)/2;
+  var mainTarget=Math.max(EMMA.calLow,calMid-250); // leave room for ~1 side + 1 snack later
+
+  // Step 1: place main recipes for breakfast/lunch/dinner (skip Snack — handled later)
+  var mainMeals=['Breakfast','Lunch','Dinner'];
   DAYS.forEach(function(day){
     var dayCal=0,dayPro=0,dayFib=0;
-    MEALS.forEach(function(meal){
+    mainMeals.forEach(function(meal){
       var avail=eligible.filter(function(r){return usage[r.id]<3;});if(!avail.length)return;
       var best=null,bestScore=-Infinity;
-      avail.forEach(function(r){var m=r.macros_per_serving;var score=((EMMA.protein/3-dayPro/3)>0?m.protein_g*3:0)+((EMMA.fiber/3-dayFib/3)>0?(m.fiber_g||0)*2:0)+((calMid/3-dayCal/3)>0?m.calories*0.4:-(m.calories*0.2))-usage[r.id]*8;if(score>bestScore){bestScore=score;best=r;}});
+      avail.forEach(function(r){var m=r.macros_per_serving;var score=((EMMA.protein/3-dayPro/3)>0?m.protein_g*3:0)+((EMMA.fiber/3-dayFib/3)>0?(m.fiber_g||0)*2:0)+((mainTarget/3-dayCal/3)>0?m.calories*0.4:-(m.calories*0.2))-usage[r.id]*8;if(score>bestScore){bestScore=score;best=r;}});
       if(best){calData.emma[day+'-'+meal]={ids:[best.id],skip:false};usage[best.id]++;dayCal+=best.macros_per_serving.calories||0;dayPro+=best.macros_per_serving.protein_g||0;dayFib+=best.macros_per_serving.fiber_g||0;}
     });
   });
   saveCal();renderCalendar();
+
+  if(!apiKey){
+    return; // No API key — mains only, skip sides/snacks suggestions
+  }
+
+  var btn=document.getElementById('autofill-btn');
+  var progressEl=document.getElementById('autofill-progress');
+  var progressTextEl=document.getElementById('autofill-progress-text');
+  if(btn){btn.disabled=true;}
+  if(progressEl){progressEl.style.display='flex';}
+  if(progressTextEl){progressTextEl.textContent='Mains placed. Adding sides...';}
+  var sidesAdded=0,sidesFailed=0,snacksAdded=0;
+
+  // Step 2: for each Lunch/Dinner with a main, ask Claude for a simple side
+  var sideMeals=['Lunch','Dinner'];
+  for(var di=0;di<DAYS.length;di++){
+    var day=DAYS[di];
+    for(var mi=0;mi<sideMeals.length;mi++){
+      var meal=sideMeals[mi];
+      var key=day+'-'+meal;
+      var e=calData.emma[key];
+      if(!e||!e.ids||!e.ids.length) continue;
+      var mainR=getR(e.ids[0]);
+      if(!mainR) continue;
+      var sideProgress=(di*sideMeals.length+mi+1)+'/'+(DAYS.length*sideMeals.length);
+      if(btn) btn.textContent='Adding sides... ('+sideProgress+')';
+      if(progressTextEl) progressTextEl.textContent='Suggesting a side for '+day+' '+meal+'... ('+sideProgress+')';
+      try{
+        var prompt='Suggest ONE simple, easy side dish with an exact portion size to go with this meal: '+mainR.name+' ('+mainR.macros_per_serving.calories+' cal, '+mainR.macros_per_serving.protein_g+'g protein per serving).\n'+(mainR.pairings?'Favorite pairings: '+mainR.pairings+'\n':'')+'\nKeep it simple — things like rice, beans, a salad, roasted vegetables, bread, etc. Return ONLY JSON: {"item":"cooked white rice","portion":"1/2 cup","cal":100,"protein_g":2,"fiber_g":1}\nReturn ONLY the JSON object.';
+        var res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:200,messages:[{role:'user',content:prompt}]})});
+        if(res.ok){
+          var data=await res.json();
+          var rawText=(data.content||[]).find(function(b){return b.type==='text';});rawText=rawText?rawText.text:'';
+          var side=extractJSON(rawText);
+          if(side&&side.item){
+            calData.emma[key].sidesNote=side.portion+' '+side.item;
+            sidesAdded++;
+          }else{
+            console.error('Side parse failed for '+key+'. Raw response:',rawText);
+            sidesFailed++;
+          }
+        }else{
+          var errBody=await res.text().catch(function(){return '';});
+          console.error('Side API error for '+key+': status '+res.status,errBody);
+          sidesFailed++;
+        }
+      }catch(ex){console.error('Side suggestion failed for '+key+':',ex.message);sidesFailed++;}
+    }
+  }
+  saveCal();renderCalendar();
+
+  // Step 3: check daily gaps and add a snack if needed
+  if(btn) btn.textContent='Checking snack needs...';
+  if(progressTextEl) progressTextEl.textContent='Checking if any days need a snack...';
+  for(var dj=0;dj<DAYS.length;dj++){
+    var day2=DAYS[dj];
+    var tot=dayMacros('emma',day2);
+    var gapCal=EMMA.calHigh-tot.cal;
+    var gapPro=EMMA.protein-tot.pro;
+    var gapFib=EMMA.fiber-tot.fib;
+    console.log('Snack check for '+day2+': tot.cal='+tot.cal+', calHigh='+EMMA.calHigh+', gapCal='+gapCal);
+    // Only add a snack if there's meaningful room left before hitting the upper calorie target
+    if(gapCal>50){
+      try{
+        var snackPrompt='Suggest ONE simple, easy snack to fill this remaining nutrition gap for the day: ~'+Math.round(gapCal)+' calories, ~'+Math.round(Math.max(0,gapPro))+'g protein, ~'+Math.round(Math.max(0,gapFib))+'g fiber still needed.\n\nKeep it simple and realistic — things like apple with peanut butter, cottage cheese, Cheez-Its, yogurt, nuts, etc. Return ONLY JSON: {"item":"apple with peanut butter","portion":"1 apple + 2 tbsp PB","cal":280,"protein_g":8,"fiber_g":5}\nReturn ONLY the JSON object.';
+        var sres=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:200,messages:[{role:'user',content:snackPrompt}]})});
+        if(sres.ok){
+          var sdata=await sres.json();
+          var srawText=(sdata.content||[]).find(function(b){return b.type==='text';});srawText=srawText?srawText.text:'';
+          var snack=extractJSON(srawText);
+          if(snack&&snack.item){
+            var snackKey=day2+'-Snack';
+            calData.emma[snackKey]={ids:[],skip:false,sidesNote:snack.portion+' '+snack.item};
+            snacksAdded++;
+          }else{
+            console.error('Snack parse failed for '+day2+'. Raw response:',srawText);
+          }
+        }else{
+          var serrBody=await sres.text().catch(function(){return '';});
+          console.error('Snack API error for '+day2+': status '+sres.status,serrBody);
+        }
+      }catch(ex){console.error('Snack suggestion failed for '+day2+':',ex.message);}
+    }
+  }
+  saveCal();renderCalendar();
+  if(btn){btn.disabled=false;btn.textContent='Auto-fill week';}
+  if(progressEl){progressEl.style.display='none';}
+  alert('Auto-fill complete.\n\nSides added: '+sidesAdded+(sidesFailed>0?' (failed: '+sidesFailed+')':'')+'\nSnacks added: '+snacksAdded+'\n\nCheck the browser console (Cmd+Option+I) for detailed gap calculations and any errors.');
 }
 
 // STAPLES
@@ -755,7 +867,7 @@ function parseFrac(s){if(!s)return null;s=s.trim();var rng=s.match(/^(\d+)-(\d+)
 function toFrac(d){if(d===null)return '';if(d===Math.floor(d))return String(d);var w=Math.floor(d),r=d-w;var fracs=[[1,8],[1,4],[1,3],[3,8],[1,2],[5,8],[2,3],[3,4],[7,8]];for(var f=0;f<fracs.length;f++){var n=fracs[f][0],dn=fracs[f][1];if(Math.abs(r-n/dn)<0.06)return w>0?w+' '+n+'/'+dn:n+'/'+dn;}return d.toFixed(1);}
 function consolidate(ings){var g={};ings.forEach(function(ing){var k=ing.item.toLowerCase().trim()+'|||'+(ing.unit||'').toLowerCase().trim();if(!g[k])g[k]={item:ing.item,unit:ing.unit||'',total:0,hasNum:false,raw:[]};var n=parseFrac(ing.amount);if(n!==null){g[k].total+=n;g[k].hasNum=true;}else if(ing.amount)g[k].raw.push(ing.amount);});return Object.values(g).map(function(x){var qty='';if(x.hasNum)qty=toFrac(x.total);if(x.raw.length)qty+=(qty?' + ':'')+x.raw.join(' + ');return{item:x.item,unit:x.unit,qty:qty};});}
 function catOf(item){var i=item.toLowerCase();if(/chicken|beef|pork|salmon|tuna|shrimp|turkey|thigh|breast|steak|flank|meatball/.test(i))return 'Meat & protein';if(/egg/.test(i))return 'Meat & protein';if(/milk|cheese|yogurt|cream cheese|butter|feta|tzatziki/.test(i))return 'Dairy';if(/peach|apple|banana|blueberr|lemon|lime|orange|avocado|corn|mango/.test(i))return 'Produce - fruit';if(/onion|garlic|pepper|jalape|cilantro|spinach|kale|lettuce|broccoli|carrot|zucchini|cucumber|celery|tomato|eggplant|sprout|snap pea|green onion|scallion/.test(i))return 'Produce - veg';if(/oat|rice|pasta|bread|bagel|flour|quinoa|noodle|tortilla|couscous|glass noodle/.test(i))return 'Grains & carbs';return 'Pantry & condiments';}
-function countServings(){var s=new Map();['emma','seth'].forEach(function(p){Object.values(calData[p]).forEach(function(e){if(!e||e.skip)return;getSlotIds(e).forEach(function(id){if(!id)return;s.set(id,(s.get(id)||0)+1);});});});return s;}
+function countServings(){var s=new Map();Object.values(calData.emma).forEach(function(e){if(!e||e.skip)return;getSlotIds(e).forEach(function(id){if(!id)return;s.set(id,(s.get(id)||0)+1);});});return s;}
 function computeBatches(sMap){var b=new Map();sMap.forEach(function(sNeeded,rid){var r=getR(rid);if(!r)return;var srv=r.servings||1;b.set(rid,{batchCount:Math.ceil(sNeeded/srv),servingsNeeded:sNeeded,recipeServings:srv,name:r.name});});return b;}
 function buildGrocery(){
   var el=document.getElementById('grocery-list');
@@ -770,19 +882,17 @@ function buildGrocery(){
   // ── Meal summary by type ──────────────────────────────
   var mealSummary={breakfast:[],lunch:[],dinner:[],snack:[],other:[]};
   var seenInSummary=new Set();
-  ['emma','seth'].forEach(function(p){
-    MEALS.forEach(function(meal){
-      DAYS.forEach(function(day){
-        var e=calData[p][day+'-'+meal];
-        if(!e||e.skip) return;
-        getSlotIds(e).forEach(function(id){
-          if(seenInSummary.has(id)) return;
-          var r=getR(id); if(!r) return;
-          seenInSummary.add(id);
-          var mt=r.meal_type.toLowerCase();
-          if(mealSummary[mt]) mealSummary[mt].push(r.name);
-          else mealSummary.other.push(r.name);
-        });
+  MEALS.forEach(function(meal){
+    DAYS.forEach(function(day){
+      var e=calData.emma[day+'-'+meal];
+      if(!e||e.skip) return;
+      getSlotIds(e).forEach(function(id){
+        if(seenInSummary.has(id)) return;
+        var r=getR(id); if(!r) return;
+        seenInSummary.add(id);
+        var mt=r.meal_type.toLowerCase();
+        if(mealSummary[mt]) mealSummary[mt].push(r.name);
+        else mealSummary.other.push(r.name);
       });
     });
   });
@@ -926,7 +1036,7 @@ function copyForAlexa(){
 }
 
 // MEAL PREP
-function getWeekRecipes(){var seen=new Set();var result=[];['emma','seth'].forEach(function(p){Object.values(calData[p]).forEach(function(e){if(!e||e.skip)return;getSlotIds(e).forEach(function(id){if(seen.has(id))return;var r=getR(id);if(r){seen.add(id);result.push(r);}});});});return result;}
+function getWeekRecipes(){var seen=new Set();var result=[];Object.values(calData.emma).forEach(function(e){if(!e||e.skip)return;getSlotIds(e).forEach(function(id){if(seen.has(id))return;var r=getR(id);if(r){seen.add(id);result.push(r);}});});return result;}
 
 async function generatePrepPlan(){
   var key=getApiKey();
@@ -1079,6 +1189,95 @@ function exportData(){
   document.body.removeChild(a);URL.revokeObjectURL(url);
   flash('export-flash');
 }
+
+function saveGoals(){
+  var g={calLow:parseInt(document.getElementById('g-cal-low').value)||1700,calHigh:parseInt(document.getElementById('g-cal-high').value)||1900,protein:parseInt(document.getElementById('g-protein').value)||90,fiber:parseInt(document.getElementById('g-fiber').value)||15};
+  EMMA_GOALS=g;EMMA=Object.assign({calYellow:100},g);
+  LS.set('mp_goals',g);flash('goals-saved');renderCalendar();
+}
+function loadGoalsForm(){
+  var f=function(id,v){var el=document.getElementById(id);if(el)el.value=v;};
+  f('g-cal-low',EMMA_GOALS.calLow||1700);f('g-cal-high',EMMA_GOALS.calHigh||1900);
+  f('g-protein',EMMA_GOALS.protein||90);f('g-fiber',EMMA_GOALS.fiber||15);
+}
+function showSidesPanel(day,meal){
+  try{
+    var existing=document.getElementById('sides-panel-wrap');if(existing)existing.remove();
+    var wrap=document.createElement('div');wrap.id='sides-panel-wrap';
+    wrap.style.cssText='background:var(--surface);border:1px solid var(--border-strong);border-radius:var(--radius-lg);padding:14px;margin-top:8px;margin-bottom:16px;';
+    var closeBtn=document.createElement('button');closeBtn.className='btn-icon';closeBtn.innerHTML='&#10005;';closeBtn.onclick=function(){wrap.remove();};
+    var header=document.createElement('div');header.style.cssText='display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;';
+    var title=document.createElement('div');title.style.cssText='font-size:13px;font-weight:600;color:var(--text);';title.textContent='Sides for '+day+' '+meal;
+    header.appendChild(title);header.appendChild(closeBtn);
+    var panel=document.createElement('div');panel.style.cssText='margin-top:0;color:var(--text-muted);font-size:13px;';
+    panel.textContent='Loading...';
+    wrap.appendChild(header);wrap.appendChild(panel);
+    var calPicker=document.getElementById('cal-picker');
+    if(!calPicker){alert('Could not find calendar picker element.');return;}
+    calPicker.parentNode.insertBefore(wrap,calPicker.nextSibling);
+    wrap.scrollIntoView({behavior:'smooth',block:'nearest'});
+    suggestSides(day,meal,null,panel);
+  }catch(ex){
+    alert('Error opening sides panel: '+ex.message);
+  }
+}
+async function suggestSides(day,meal,btn,panel){
+  try{
+  var apiKey=getApiKey();
+  if(!apiKey){if(panel)panel.innerHTML='<div style="color:var(--danger);padding:12px">No API key set. Go to Settings to add one.</div>';else alert('No API key. Go to Settings.');return;}
+  var e=calData.emma[day+'-'+meal]||{};var ids=getSlotIds(e);
+  if(!ids.length){if(panel)panel.innerHTML='<div style="color:var(--danger);padding:12px">No main recipe found in this meal slot.</div>';else alert('Add a main recipe first.');return;}
+  var mainRecipes=ids.map(function(id){return getR(id);}).filter(Boolean);
+  var tot=dayMacros('emma',day);
+  var remaining={cal:Math.max(0,Math.round((EMMA.calLow+EMMA.calHigh)/2)-tot.cal),pro:Math.max(0,EMMA.protein-tot.pro),fib:Math.max(0,EMMA.fiber-tot.fib)};
+  var pairings=mainRecipes.map(function(r){return r.pairings||'';}).filter(Boolean).join(', ');
+  var mainDesc=mainRecipes.map(function(r){return r.name+' ('+r.macros_per_serving.calories+'cal, '+r.macros_per_serving.protein_g+'g pro, '+(r.macros_per_serving.fiber_g||0)+'g fiber)';}).join(' + ');
+  if(btn){btn.disabled=true;btn.textContent='Thinking...';}
+  if(panel){panel.innerHTML='<div style="padding:12px;color:var(--text-muted)">Claude is suggesting sides...</div>';panel.style.display='block';}
+  var prompt='You are a nutrition-aware meal planning assistant helping Emma.\n\nEmma is planning '+meal+' on '+day+'.\nMain dish: '+mainDesc+'\n'+(pairings?'Favorite pairings: '+pairings+'\n':'')+'Full day macros so far: '+tot.cal+' cal, '+tot.pro+'g protein, '+tot.fib+'g fiber\nDaily targets: '+EMMA.calLow+'-'+EMMA.calHigh+' cal, '+EMMA.protein+'g+ protein, '+EMMA.fiber+'g+ fiber\nStill needed: ~'+remaining.cal+' cal, '+remaining.pro+'g protein, '+remaining.fib+'g fiber\n\nSuggest 2-3 side combinations that pair well with the main dish and help hit remaining targets. Include exact portion sizes and nutrition per side.\n\nReturn ONLY valid JSON:\n{"suggestions":[{"name":"Option name","sides":[{"item":"black beans","portion":"1/4 cup","cal":55,"protein_g":4,"fiber_g":4}],"total_cal":55,"total_protein_g":4,"total_fiber_g":4,"note":"Why this works"}]}\n\nReturn ONLY JSON.';
+  try{
+    var res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:1500,messages:[{role:'user',content:prompt}]})});
+    if(btn){btn.disabled=false;btn.textContent='Suggest sides & portions';}
+    if(!res.ok){var err=await res.json().catch(function(){return{};});if(panel)panel.innerHTML='<div style="color:var(--danger);padding:12px">Error: '+(err&&err.error&&err.error.message?err.error.message:res.status)+'</div>';return;}
+    var data=await res.json();
+    var rawText=(data.content||[]).find(function(b){return b.type==='text';});rawText=rawText?rawText.text:'';
+    var result=extractJSON(rawText);
+    if(!result||!result.suggestions){if(panel)panel.innerHTML='<div style="color:var(--danger);padding:12px">Could not parse. Try again.</div>';return;}
+    renderSidesSuggestions(result.suggestions,day,meal,panel);
+  }catch(ex){
+    if(btn){btn.disabled=false;btn.textContent='Suggest sides & portions';}
+    if(panel)panel.innerHTML='<div style="color:var(--danger);padding:12px">Error: '+ex.message+'</div>';
+  }
+  }catch(outerEx){
+    if(panel)panel.innerHTML='<div style="color:var(--danger);padding:12px">Unexpected error: '+outerEx.message+'</div>';
+  }
+}
+function renderSidesSuggestions(suggestions,day,meal,panel){
+  var html='';
+  suggestions.forEach(function(s,si){
+    html+='<div style="background:var(--surface-2);border-radius:var(--radius);padding:12px;margin-bottom:10px;border:1px solid var(--border)">';
+    html+='<div style="font-size:13px;font-weight:600;margin-bottom:6px">'+s.name+'</div>';
+    html+='<div style="font-size:11px;color:var(--text-muted);margin-bottom:6px">'+s.total_cal+' cal &middot; '+s.total_protein_g+'g protein &middot; '+s.total_fiber_g+'g fiber</div>';
+    (s.sides||[]).forEach(function(side){html+='<div style="font-size:13px;color:var(--text-2);padding:2px 0">&middot; <strong>'+side.portion+'</strong> '+side.item+' ('+side.cal+'cal, '+side.protein_g+'g pro, '+side.fiber_g+'g fiber)</div>';});
+    if(s.note)html+='<div style="font-size:12px;color:var(--accent);margin-top:6px;font-style:italic">'+s.note+'</div>';
+    html+='<div style="display:flex;gap:8px;margin-top:10px"><button class="btn btn-primary btn-sm" data-si="'+si+'" data-action="add-note">Add to meal</button><button class="btn btn-ghost btn-sm" data-si="'+si+'" data-action="save-card">Save as recipe</button></div>';
+    html+='</div>';
+  });
+  panel.innerHTML=html;
+  panel.onclick=function(ev){
+    var b=ev.target.closest('[data-action]');if(!b)return;
+    var si=parseInt(b.getAttribute('data-si'));var s=suggestions[si];var action=b.getAttribute('data-action');
+    if(action==='add-note'){
+      if(!calData.emma[day+'-'+meal])calData.emma[day+'-'+meal]={ids:[],skip:false};
+      calData.emma[day+'-'+meal].sidesNote=s.name+': '+(s.sides||[]).map(function(x){return x.portion+' '+x.item;}).join(', ');
+      saveCal();renderCalendar();b.textContent='Added!';b.disabled=true;
+    } else if(action==='save-card'){
+      var r={name:s.name,meal_type:'side',servings:1,prep_time:'5 min',cook_time:'10 min',macros_per_serving:{calories:s.total_cal,protein_g:s.total_protein_g,fiber_g:s.total_fiber_g,carbs_g:0,fat_g:0},ingredients:(s.sides||[]).map(function(x){return{amount:x.portion,unit:'',item:x.item};}),instructions:'',source:'',source_url:'',tags:['sides'],mark_new:true,pairings:''};
+      document.getElementById('sides-panel-wrap').remove();
+      openModal(r);
+    }
+  };
+}
 // INIT
 renderRecipes();
 updateCount();
@@ -1089,6 +1288,7 @@ updateKeyStatus();
 renderRecipes();
 updateCount();
 updateKeyStatus();
+loadGoalsForm();
 </script>
 </body>
 </html>
