@@ -941,7 +941,7 @@ function buildGrocery(){
   if(!batches.size&&!activeStaples.length){el.innerHTML='';empty.style.display='block';return;}
   empty.style.display='none';
 
-  // ── Meal summary cards (Breakfast / Lunch / Dinner only, with batch count) ──
+  // ── Meal summary cards ────────────────────────────────
   var mealSummary={breakfast:[],lunch:[],dinner:[]};
   var seenInSummary=new Set();
   ['Breakfast','Lunch','Dinner'].forEach(function(meal){
@@ -976,7 +976,7 @@ function buildGrocery(){
   summaryHTML+='</div>';
   batchEl.innerHTML=summaryHTML;
 
-  // ── Skip list ─────────────────────────────────────────
+  // ── Collect raw scaled ingredients ────────────────────
   var SKIP_PATTERNS=[
     /^water$/i,/^salt$/i,/^pepper$/i,/^black pepper$/i,/^salt and pepper$/i,
     /^salt & pepper$/i,/^kosher salt$/i,/^sea salt$/i,/^to taste$/i,
@@ -989,213 +989,66 @@ function buildGrocery(){
     return false;
   }
 
-  // ── Category detection ────────────────────────────────
-  function catOf(item){
-    var it=item.toLowerCase();
-    if(/chicken|beef|pork|salmon|tuna|shrimp|turkey|steak|lamb|bison|sausage|ground meat|flank|meatball|prosciutto|bacon|ham|cod|tilapia|halibut|scallop|crab|lobster|anchov/i.test(it)) return 'Meat & protein';
-    if(/milk|cream|cheese|yogurt|butter|ghee|kefir|sour cream|cottage cheese|cream cheese|cheddar|mozzarella|parmesan|feta|brie|ricotta|half.and.half|heavy cream|egg/i.test(it)) return 'Dairy';
-    if(/apple|banana|berry|strawberr|blueberr|raspberr|blackberr|mango|peach|pear|plum|grape|melon|watermelon|cantaloupe|orange|lemon|lime|grapefruit|pineapple|cherry|fig|date|kiwi|avocado/i.test(it)) return 'Produce - fruit';
-    if(/lettuce|spinach|kale|arugula|cabbage|broccoli|cauliflower|carrot|celery|cucumber|zucchini|squash|pepper|onion|garlic|tomato|potato|sweet potato|yam|mushroom|asparagus|green bean|pea|corn|beet|radish|turnip|leek|shallot|scallion|bok choy|eggplant|artichoke|herb|cilantro|parsley|basil|thyme|rosemary|mint|ginger|jalapen|serrano/i.test(it)) return 'Produce - veg';
-    if(/rice|pasta|bread|tortilla|noodle|quinoa|oat|flour|cereal|cracker|chip|wrap|pita|bagel|roll|bun|couscous|barley|farro|lentil|bean|chickpea|black bean|kidney bean|edamame|tofu|tempeh/i.test(it)) return 'Grains & carbs';
-    return 'Pantry & condiments';
-  }
-
-  // ── Smart unit normalization ──────────────────────────
-  var PROTEIN_RE=/chicken|beef|pork|salmon|tuna|shrimp|turkey|steak|lamb|bison|sausage|ground meat|flank|meatball/i;
-  var DAIRY_MILK_RE=/\bmilk\b/i;
-  var DAIRY_YOGURT_RE=/\byogurt\b/i;
-  var PRODUCE_COUNT_RE=/banana|apple|lemon|lime|orange|avocado|egg|peach|pear|plum|mango/i;
-  var PRODUCE_PACK_RE=/strawberr|blueberr|raspberr|blackberr|cherry|grape/i;
-  var PRODUCE_BAG_RE=/spinach|kale|lettuce|arugula|cabbage|salad mix/i;
-
-  function normalizeProduce(item,qty,unit){
-    var it=item.toLowerCase();
-    if(PRODUCE_COUNT_RE.test(it)){
-      // Convert to whole count
-      var n=parseFrac(qty);
-      if(n===null) n=1;
-      // If unit is lb/oz, estimate count (roughly 2-3 items per lb)
-      if(/lb|oz/i.test(unit)) n=Math.ceil(n*(unit.toLowerCase().indexOf('lb')>=0?3:0.2));
-      return {qty:String(Math.ceil(n)),unit:''};
-    }
-    if(PRODUCE_PACK_RE.test(it)) return {qty:String(Math.ceil(parseFrac(qty)||1)),unit:'pack'+(Math.ceil(parseFrac(qty)||1)>1?'s':'')};
-    if(PRODUCE_BAG_RE.test(it)) return {qty:String(Math.ceil(parseFrac(qty)||1)),unit:'bag'+(Math.ceil(parseFrac(qty)||1)>1?'s':'')};
-    return null;
-  }
-
-  function toOz(qty,unit){
-    var n=parseFrac(qty); if(n===null) return null;
-    var u=(unit||'').toLowerCase().trim();
-    if(u==='oz'||u==='ounce'||u==='ounces') return n;
-    if(u==='lb'||u==='lbs'||u==='pound'||u==='pounds') return n*16;
-    if(u==='g'||u==='gram'||u==='grams') return n/28.35;
-    if(u==='kg') return n*35.274;
-    if(u==='cup'||u==='cups') return n*8;
-    if(u==='tbsp'||u==='tablespoon') return n*0.5;
-    if(u==='tsp'||u==='teaspoon') return n/6;
-    return null;
-  }
-
-  function formatProtein(oz){
-    var lbs=oz/16;
-    var rounded=Math.ceil(lbs*2)/2;
-    return {qty:String(rounded),unit:rounded===1?'lb':'lbs'};
-  }
-
-  function formatMilk(oz){
-    var gal=oz/128;
-    if(gal>=1) return {qty:String(Math.ceil(gal*2)/2),unit:gal===1?'gallon':'gallons'};
-    var qt=oz/32;
-    if(qt>=1) return {qty:String(Math.ceil(qt)),unit:'qt'};
-    return {qty:String(Math.ceil(oz)),unit:'oz'};
-  }
-
-  function formatYogurt(oz){
-    // Round to nearest 32oz container
-    var containers=Math.ceil(oz/32);
-    return {qty:String(containers),unit:containers===1?'32oz container':'32oz containers'};
-  }
-
-  // ── Fuzzy item name normalization ─────────────────────
-  // Normalize common plurals and synonyms so "chicken breast" and "chicken breasts" merge
-  var NAME_FIXES=[
-    [/\bbreasts?\b/g,'breast'],[/\bthighs?\b/g,'thigh'],[/\bfillets?\b/g,'fillet'],
-    [/\bcloves?\b/g,'clove'],[/\bcups?\b/g,'cup'],[/\btbsps?\b/g,'tbsp'],
-    [/\btsps?\b/g,'tsp'],[/\bpounds?\b/g,'lb'],[/\bounces?\b/g,'oz'],
-    [/\beggs?\b/g,'egg'],[/\btomatoes\b/g,'tomato'],[/\bpotatoes\b/g,'potato'],
-    [/\bberries\b/g,'berry'],[/\bbananas\b/g,'banana'],[/\bapples\b/g,'apple'],
-    [/\blimes?\b/g,'lime'],[/\blemons?\b/g,'lemon'],[/\bonions?\b/g,'onion'],
-    [/\bcarrots?\b/g,'carrot'],[/\bpeaches\b/g,'peach']
-  ];
-  // Strip common descriptive prefixes/suffixes before matching
-  var STRIP_WORDS=/\b(boneless|skinless|bone-in|fresh|frozen|organic|large|medium|small|extra|lean|ground|whole|raw|cooked|diced|sliced|chopped|minced|peeled|shredded|grated|melted|softened|room temperature|unsalted|salted|low.fat|full.fat|low.sodium|reduced.fat|plain|vanilla|pure|1%|2%|whole|non-?fat)\b/gi;
-  function normalizeName(name){
-    var n=name.trim().toLowerCase();
-    n=n.replace(STRIP_WORDS,'').replace(/\s+/g,' ').trim();
-    NAME_FIXES.forEach(function(fix){n=n.replace(fix[0],fix[1]);});
-    return n;
-  }
-
-  // ── Collect and scale ingredients ─────────────────────
-  var rawIngs=[];
+  var rawLines=[];
   batches.forEach(function(info,rid){
     var r=getR(rid); if(!r) return;
     (r.ingredients||[]).forEach(function(ing){
       if(shouldSkip(ing.item)) return;
       var n=parseFrac(ing.amount);
-      var scaledAmt=n!==null?n*info.batchCount:null;
-      rawIngs.push({
-        item:ing.item,
-        normItem:normalizeName(ing.item),
-        unit:normalizeUnit((ing.unit||'').toLowerCase().trim()),
-        amount:scaledAmt,
-        rawAmount:ing.amount
-      });
+      var scaledAmt=n!==null?Math.round(n*info.batchCount*100)/100:null;
+      var line=(scaledAmt!==null?scaledAmt+' ':'')+
+               (ing.unit?ing.unit+' ':'')+
+               ing.item;
+      rawLines.push(line.trim());
     });
   });
 
-  // Normalize common unit aliases so 'tbsp' and 'tablespoon' group together
-  function normalizeUnit(u){
-    if(!u) return '';
-    if(/^tbsp|^tablespoon/i.test(u)) return 'tbsp';
-    if(/^tsp|^teaspoon/i.test(u)) return 'tsp';
-    if(/^cup/i.test(u)) return 'cup';
-    if(/^oz|^ounce/i.test(u)) return 'oz';
-    if(/^lb|^pound/i.test(u)) return 'lb';
-    if(/^g$|^gram/i.test(u)) return 'g';
-    if(/^kg|^kilogram/i.test(u)) return 'kg';
-    if(/^ml|^milliliter/i.test(u)) return 'ml';
-    if(/^l$|^liter/i.test(u)) return 'l';
-    if(/^pinch|^dash/i.test(u)) return 'pinch';
-    if(/^clove/i.test(u)) return 'clove';
-    if(/^can/i.test(u)) return 'can';
-    if(/^pack|^bag|^bunch/i.test(u)) return u;
-    return u;
+  if(!rawLines.length&&!activeStaples.length){empty.style.display='block';el.innerHTML='';return;}
+
+  // If no API key, fall back to basic uncategorized list
+  var apiKey=getApiKey();
+  if(!apiKey){
+    renderBasicGrocery(el,rawLines,activeStaples);
+    return;
   }
 
-  // ── Smart consolidation ───────────────────────────────
-  var groups={};
-  rawIngs.forEach(function(ing){
-    var k=ing.normItem;
-    if(!groups[k]) groups[k]={item:ing.item,normItem:k,entries:[]};
-    groups[k].entries.push({amount:ing.amount,unit:ing.unit,raw:ing.rawAmount});
-  });
+  // ── Ask Claude to consolidate ─────────────────────────
+  el.innerHTML='<div style="padding:24px;text-align:center;color:var(--text-muted)">Consolidating grocery list with Claude...</div>';
 
-  var consolidated=[];
-  Object.keys(groups).forEach(function(k){
-    var g=groups[k];
-    var item=g.item;
-    var cat=catOf(item);
+  var prompt='You are a grocery list assistant. I have the following raw ingredients from my meal plan this week (already scaled to the number of batches needed):\n\n'+
+    rawLines.join('\n')+
+    '\n\nPlease consolidate this into a clean, practical grocery list by:\n'+
+    '1. Merging duplicates and similar items (e.g. "chicken breast" and "boneless chicken breast" become one entry, "limes" and "lime" merge)\n'+
+    '2. Summing quantities where possible\n'+
+    '3. Using practical grocery units: meats in lbs rounded up to nearest 0.5lb, milk in gallons/quarts, yogurt in oz containers (32oz), countable produce as whole numbers (3 bananas), berries as packs, leafy greens as bags\n'+
+    '4. Categorizing into: Produce - veg, Produce - fruit, Meat & protein, Dairy, Grains & carbs, Pantry & condiments\n'+
+    '5. Sorting alphabetically within each category\n\n'+
+    'Return ONLY a JSON object in this exact format, no markdown:\n'+
+    '{"categories":{"Produce - veg":[{"item":"spinach","qty":"1 bag"},{"item":"onion","qty":"2"}],"Produce - fruit":[{"item":"banana","qty":"3"}],"Meat & protein":[{"item":"chicken breast","qty":"2.5 lbs"}],"Dairy":[{"item":"milk","qty":"1 gallon"}],"Grains & carbs":[{"item":"brown rice","qty":"2 cups"}],"Pantry & condiments":[{"item":"olive oil","qty":"3 tbsp"}]}}\n'+
+    'Only include categories that have items. Return ONLY the JSON.';
 
-    // Try to sum all entries in oz
-    var totalOz=0;var canSumOz=true;
-    g.entries.forEach(function(e){
-      if(e.amount===null){canSumOz=false;return;}
-      var oz=toOz(String(e.amount),e.unit);
-      if(oz===null) canSumOz=false;
-      else totalOz+=oz;
-    });
-
-    // Also try simple numeric sum (same unit or unitless)
-    var allUnits=g.entries.map(function(e){return e.unit;});
-    var sameUnit=allUnits.every(function(u){return u===allUnits[0];});
-    var totalRaw=0;var canSumRaw=true;
-    g.entries.forEach(function(e){
-      if(e.amount===null){canSumRaw=false;return;}
-      totalRaw+=e.amount;
-    });
-    var firstUnit=allUnits[0]||'';
-
-    // Apply smart formatting
-    if(PROTEIN_RE.test(item)&&canSumOz){
-      var fmt=formatProtein(totalOz);
-      consolidated.push({item:item,qty:fmt.qty,unit:fmt.unit});
-    } else if(DAIRY_MILK_RE.test(item)&&canSumOz){
-      var fmt2=formatMilk(totalOz);
-      consolidated.push({item:item,qty:fmt2.qty,unit:fmt2.unit});
-    } else if(DAIRY_YOGURT_RE.test(item)&&canSumOz){
-      var fmt3=formatYogurt(totalOz);
-      consolidated.push({item:item,qty:fmt3.qty,unit:fmt3.unit});
-    } else if((cat==='Produce - fruit'||cat==='Produce - veg')&&canSumRaw){
-      var pFmt=normalizeProduce(item,String(totalRaw),firstUnit);
-      if(pFmt){
-        consolidated.push({item:item,qty:pFmt.qty,unit:pFmt.unit});
-      } else {
-        var dispAmt=Math.round(totalRaw*10)/10;
-        consolidated.push({item:item,qty:String(dispAmt),unit:firstUnit});
-      }
-    } else if(canSumOz){
-      // Generic oz-summable — keep in original unit if same, else show oz
-      if(sameUnit){
-        var dispRaw=Math.round(totalRaw*100)/100;
-        var dispStr=dispRaw%1===0?String(dispRaw):String(Math.round(dispRaw*4)/4);
-        consolidated.push({item:item,qty:dispStr,unit:firstUnit});
-      } else {
-        // Mixed units — convert everything to oz and show
-        var dispOz=Math.round(totalOz*10)/10;
-        consolidated.push({item:item,qty:String(dispOz),unit:'oz'});
-      }
-    } else if(canSumRaw&&sameUnit){
-      // Same unit, just sum numerically
-      var dispRaw2=Math.round(totalRaw*100)/100;
-      consolidated.push({item:item,qty:String(dispRaw2),unit:firstUnit});
-    } else {
-      // Can't sum at all — show first entry with a note if multiple
-      var qty0=g.entries[0].raw||'';
-      var unit0=g.entries[0].unit||'';
-      consolidated.push({item:item,qty:qty0,unit:unit0});
+  fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+    body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:2000,messages:[{role:'user',content:prompt}]})
+  }).then(function(res){
+    if(!res.ok) throw new Error('API error '+res.status);
+    return res.json();
+  }).then(function(data){
+    var rawText=(data.content||[]).find(function(b){return b.type==='text';});
+    rawText=rawText?rawText.text:'';
+    var result=extractJSON(rawText);
+    if(!result||!result.categories){
+      renderBasicGrocery(el,rawLines,activeStaples);
+      return;
     }
+    renderClaudeGrocery(el,result.categories,activeStaples);
+  }).catch(function(){
+    renderBasicGrocery(el,rawLines,activeStaples);
   });
+}
 
-  // ── Categorize and render ─────────────────────────────
-  var cats={};
-  consolidated.forEach(function(x){
-    var c=catOf(x.item);
-    if(!cats[c]) cats[c]=[];
-    var qs=[x.qty,x.unit].filter(Boolean).join(' ').replace(/\s+/g,' ').trim();
-    cats[c].push({name:x.item,display:qs?'('+qs+')':''});
-  });
-
+function renderClaudeGrocery(el,categories,activeStaples){
   var ORDER=['Produce - veg','Produce - fruit','Meat & protein','Dairy','Grains & carbs','Pantry & condiments'];
   var html='';
   if(activeStaples.length){
@@ -1205,13 +1058,35 @@ function buildGrocery(){
     });
     html+='</div>';
   }
-  ORDER.filter(function(c){return cats[c];}).forEach(function(c){
-    html+='<div class="grocery-section"><div class="grocery-cat">'+c+'</div>';
-    cats[c].sort(function(a,b){return a.name.localeCompare(b.name);}).forEach(function(x){
-      html+='<div class="grocery-item"><input type="checkbox"><span class="g-edit-name" contenteditable="true">'+x.name+'</span><span class="g-edit-qty" contenteditable="true">'+(x.display||'')+'</span></div>';
+  ORDER.forEach(function(cat){
+    var items=categories[cat];
+    if(!items||!items.length) return;
+    html+='<div class="grocery-section"><div class="grocery-cat">'+cat+'</div>';
+    items.forEach(function(x){
+      html+='<div class="grocery-item"><input type="checkbox"><span class="g-edit-name" contenteditable="true">'+x.item+'</span><span class="g-edit-qty" contenteditable="true">'+(x.qty?'('+x.qty+')':'')+'</span></div>';
     });
     html+='</div>';
   });
+  el.innerHTML=html;
+  el.addEventListener('change',function(ev){
+    if(ev.target.type==='checkbox') ev.target.closest('.grocery-item').classList.toggle('checked',ev.target.checked);
+  });
+}
+
+function renderBasicGrocery(el,rawLines,activeStaples){
+  var html='';
+  if(activeStaples.length){
+    html+='<div class="grocery-section"><div class="grocery-cat">Weekly staples</div>';
+    activeStaples.forEach(function(s){
+      html+='<div class="grocery-item"><input type="checkbox"><span class="g-edit-name" contenteditable="true">'+s+'</span><span class="g-edit-qty" contenteditable="true"></span></div>';
+    });
+    html+='</div>';
+  }
+  html+='<div class="grocery-section"><div class="grocery-cat">All ingredients</div>';
+  rawLines.forEach(function(line){
+    html+='<div class="grocery-item"><input type="checkbox"><span class="g-edit-name" contenteditable="true">'+line+'</span><span class="g-edit-qty" contenteditable="true"></span></div>';
+  });
+  html+='</div>';
   el.innerHTML=html;
   el.addEventListener('change',function(ev){
     if(ev.target.type==='checkbox') ev.target.closest('.grocery-item').classList.toggle('checked',ev.target.checked);
