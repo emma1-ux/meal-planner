@@ -1067,8 +1067,11 @@ function buildGrocery(){
     [/\blimes?\b/g,'lime'],[/\blemons?\b/g,'lemon'],[/\bonions?\b/g,'onion'],
     [/\bcarrots?\b/g,'carrot'],[/\bpeaches\b/g,'peach']
   ];
+  // Strip common descriptive prefixes/suffixes before matching
+  var STRIP_WORDS=/\b(boneless|skinless|bone-in|fresh|frozen|organic|large|medium|small|extra|lean|ground|whole|raw|cooked|diced|sliced|chopped|minced|peeled|shredded|grated|melted|softened|room temperature|unsalted|salted|low.fat|full.fat|low.sodium|reduced.fat|plain|vanilla|pure|1%|2%|whole|non-?fat)\b/gi;
   function normalizeName(name){
     var n=name.trim().toLowerCase();
+    n=n.replace(STRIP_WORDS,'').replace(/\s+/g,' ').trim();
     NAME_FIXES.forEach(function(fix){n=n.replace(fix[0],fix[1]);});
     return n;
   }
@@ -1080,81 +1083,107 @@ function buildGrocery(){
     (r.ingredients||[]).forEach(function(ing){
       if(shouldSkip(ing.item)) return;
       var n=parseFrac(ing.amount);
+      var scaledAmt=n!==null?n*info.batchCount:null;
       rawIngs.push({
         item:ing.item,
         normItem:normalizeName(ing.item),
-        unit:(ing.unit||'').toLowerCase().trim(),
-        amount:n!==null?n*info.batchCount:null,
+        unit:normalizeUnit((ing.unit||'').toLowerCase().trim()),
+        amount:scaledAmt,
         rawAmount:ing.amount
       });
     });
   });
 
+  // Normalize common unit aliases so 'tbsp' and 'tablespoon' group together
+  function normalizeUnit(u){
+    if(!u) return '';
+    if(/^tbsp|^tablespoon/i.test(u)) return 'tbsp';
+    if(/^tsp|^teaspoon/i.test(u)) return 'tsp';
+    if(/^cup/i.test(u)) return 'cup';
+    if(/^oz|^ounce/i.test(u)) return 'oz';
+    if(/^lb|^pound/i.test(u)) return 'lb';
+    if(/^g$|^gram/i.test(u)) return 'g';
+    if(/^kg|^kilogram/i.test(u)) return 'kg';
+    if(/^ml|^milliliter/i.test(u)) return 'ml';
+    if(/^l$|^liter/i.test(u)) return 'l';
+    if(/^pinch|^dash/i.test(u)) return 'pinch';
+    if(/^clove/i.test(u)) return 'clove';
+    if(/^can/i.test(u)) return 'can';
+    if(/^pack|^bag|^bunch/i.test(u)) return u;
+    return u;
+  }
+
   // ── Smart consolidation ───────────────────────────────
-  // Group by normalized name
   var groups={};
   rawIngs.forEach(function(ing){
     var k=ing.normItem;
     if(!groups[k]) groups[k]={item:ing.item,normItem:k,entries:[]};
-    // Prefer original casing from first entry
     groups[k].entries.push({amount:ing.amount,unit:ing.unit,raw:ing.rawAmount});
   });
 
-  // For each group, sum amounts where units are compatible
   var consolidated=[];
   Object.keys(groups).forEach(function(k){
     var g=groups[k];
-    var totalOz=0;var canSum=true;var mixedUnits=false;
-    var firstUnit=g.entries[0].unit;
-
-    g.entries.forEach(function(e){
-      var oz=toOz(String(e.amount||0),e.unit);
-      if(oz===null){canSum=false;}
-      else totalOz+=oz;
-      if(e.unit!==firstUnit) mixedUnits=true;
-    });
-
-    var item=g.item; // original casing
+    var item=g.item;
     var cat=catOf(item);
 
-    if(!canSum){
-      // Can't sum — just list unique entries
-      var seen={};
-      g.entries.forEach(function(e){
-        var key=(e.raw||'')+'|'+(e.unit||'');
-        if(seen[key]) return;
-        seen[key]=true;
-        consolidated.push({item:item,qty:e.raw||'',unit:e.unit||''});
-      });
-      return;
-    }
+    // Try to sum all entries in oz
+    var totalOz=0;var canSumOz=true;
+    g.entries.forEach(function(e){
+      if(e.amount===null){canSumOz=false;return;}
+      var oz=toOz(String(e.amount),e.unit);
+      if(oz===null) canSumOz=false;
+      else totalOz+=oz;
+    });
 
-    // Apply smart unit formatting by category/item type
-    if(PROTEIN_RE.test(item)){
+    // Also try simple numeric sum (same unit or unitless)
+    var allUnits=g.entries.map(function(e){return e.unit;});
+    var sameUnit=allUnits.every(function(u){return u===allUnits[0];});
+    var totalRaw=0;var canSumRaw=true;
+    g.entries.forEach(function(e){
+      if(e.amount===null){canSumRaw=false;return;}
+      totalRaw+=e.amount;
+    });
+    var firstUnit=allUnits[0]||'';
+
+    // Apply smart formatting
+    if(PROTEIN_RE.test(item)&&canSumOz){
       var fmt=formatProtein(totalOz);
       consolidated.push({item:item,qty:fmt.qty,unit:fmt.unit});
-    } else if(DAIRY_MILK_RE.test(item)){
+    } else if(DAIRY_MILK_RE.test(item)&&canSumOz){
       var fmt2=formatMilk(totalOz);
       consolidated.push({item:item,qty:fmt2.qty,unit:fmt2.unit});
-    } else if(DAIRY_YOGURT_RE.test(item)){
+    } else if(DAIRY_YOGURT_RE.test(item)&&canSumOz){
       var fmt3=formatYogurt(totalOz);
       consolidated.push({item:item,qty:fmt3.qty,unit:fmt3.unit});
-    } else if(cat==='Produce - fruit'||cat==='Produce - veg'){
-      var pFmt=normalizeProduce(item,String(totalOz/8),firstUnit);
+    } else if((cat==='Produce - fruit'||cat==='Produce - veg')&&canSumRaw){
+      var pFmt=normalizeProduce(item,String(totalRaw),firstUnit);
       if(pFmt){
         consolidated.push({item:item,qty:pFmt.qty,unit:pFmt.unit});
       } else {
-        // Keep in original unit, just sum
-        var sumN=0;
-        g.entries.forEach(function(e){sumN+=parseFrac(String(e.amount||0))||0;});
-        consolidated.push({item:item,qty:String(Math.ceil(sumN*10)/10),unit:firstUnit});
+        var dispAmt=Math.round(totalRaw*10)/10;
+        consolidated.push({item:item,qty:String(dispAmt),unit:firstUnit});
       }
+    } else if(canSumOz){
+      // Generic oz-summable — keep in original unit if same, else show oz
+      if(sameUnit){
+        var dispRaw=Math.round(totalRaw*100)/100;
+        var dispStr=dispRaw%1===0?String(dispRaw):String(Math.round(dispRaw*4)/4);
+        consolidated.push({item:item,qty:dispStr,unit:firstUnit});
+      } else {
+        // Mixed units — convert everything to oz and show
+        var dispOz=Math.round(totalOz*10)/10;
+        consolidated.push({item:item,qty:String(dispOz),unit:'oz'});
+      }
+    } else if(canSumRaw&&sameUnit){
+      // Same unit, just sum numerically
+      var dispRaw2=Math.round(totalRaw*100)/100;
+      consolidated.push({item:item,qty:String(dispRaw2),unit:firstUnit});
     } else {
-      // Generic: sum and keep first unit
-      var sumN2=0;
-      g.entries.forEach(function(e){sumN2+=e.amount||0;});
-      var dispN=Math.round(sumN2*100)/100;
-      consolidated.push({item:item,qty:dispN?String(dispN):'',unit:firstUnit});
+      // Can't sum at all — show first entry with a note if multiple
+      var qty0=g.entries[0].raw||'';
+      var unit0=g.entries[0].unit||'';
+      consolidated.push({item:item,qty:qty0,unit:unit0});
     }
   });
 
