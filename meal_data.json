@@ -1,0 +1,1083 @@
+{
+  "recipes": [
+    {
+      "rating": 0,
+      "source": "Instagram",
+      "source_url": "",
+      "instructions": "1. Season chicken thighs with chili oil, hot honey, smoked paprika, cumin, garlic powder, chili powder, salt and pepper.\n2. Broil at 500°F for 10–15 minutes.\n3. Combine corn, peach, red onion, cilantro, jalapeño, and avocado.\n4. Dress salad with lime juice, hot honey, salt and pepper.\n5. Serve chicken alongside or over the salad.",
+      "mark_new": false,
+      "id": 1,
+      "name": "Grilled Chicken & Corn Peach Salad",
+      "meal_type": "dinner",
+      "servings": 2,
+      "prep_time": "10 min",
+      "cook_time": "15 min",
+      "macros_per_serving": {
+        "fiber_g": 5,
+        "calories": 520,
+        "protein_g": 38,
+        "carbs_g": 32,
+        "fat_g": 26
+      },
+      "tags": [],
+      "added_at": "2026-06-09T15:13:54.367Z",
+      "ingredients": [
+        {
+          "amount": "2-3",
+          "unit": "",
+          "item": "chicken thighs"
+        },
+        {
+          "amount": "1",
+          "unit": "cob",
+          "item": "corn"
+        },
+        {
+          "amount": "1/2",
+          "unit": "",
+          "item": "peach"
+        },
+        {
+          "amount": "1/8",
+          "unit": "cup",
+          "item": "red onion"
+        },
+        {
+          "amount": "1/4",
+          "unit": "cup",
+          "item": "cilantro"
+        },
+        {
+          "amount": "1/2",
+          "unit": "",
+          "item": "jalapeño"
+        },
+        {
+          "amount": "1/2",
+          "unit": "",
+          "item": "avocado"
+        },
+        {
+          "amount": "1",
+          "unit": "",
+          "item": "lime"
+        },
+        {
+          "amount": "1",
+          "unit": "drizzle",
+          "item": "hot honey"
+        },
+        {
+          "amount": "1",
+          "unit": "tsp",
+          "item": "chili oil"
+        },
+        {
+          "amount": "1/2",
+          "unit": "tsp",
+          "item": "smoked paprika"
+        },
+        {
+          "amount": "1/2",
+          "unit": "tsp",
+          "item": "cumin"
+        },
+        {
+          "amount": "1/2",
+          "unit": "tsp",
+          "item": "garlic powder"
+        },
+        {
+          "amount": "1/2",
+          "unit": "tsp",
+          "item": "chili powder"
+        },
+        {
+          "amount": "",
+          "unit": "to taste",
+          "item": "salt & pepper"
+        }
+      ]
+    },
+    {
+      "rating": 4,
+      "source": "",
+      "source_url": "",
+      "instructions": "1. Combine oats, chia seeds, milk, maple syrup, vanilla, and salt in a jar.\n2. Stir, cover, and refrigerate overnight.\n3. Top with blueberries and serve cold.",
+      "mark_new": false,
+      "id": 2,
+      "name": "Blueberry Chia Overnight Oats",
+      "meal_type": "breakfast",
+      "servings": 1,
+      "prep_time": "10 min",
+      "cook_time": "0 min",
+      "macros_per_serving": {
+        "fiber_g": 9,
+        "calories": 380,
+        "protein_g": 14,
+        "carbs_g": 52,
+        "fat_g": 11
+      },
+      "tags": [],
+      "added_at": "2026-05-30T15:13:54.367Z",
+      "ingredients": [
+        {
+          "amount": "1/2",
+          "unit": "cup",
+          "item": "WF 365 rolled oats"
+        },
+        {
+          "amount": "1",
+          "unit": "tbsp",
+          "item": "WF 365 chia seeds"
+        },
+        {
+          "amount": "1",
+          "unit": "cup",
+          "item": "2% dairy milk"
+        },
+        {
+          "amount": "1/2",
+          "unit": "cup",
+          "item": "blueberries"
+        },
+        {
+          "amount": "1",
+          "unit": "tbsp",
+          "item": "WF 365 maple syrup"
+        },
+        {
+          "amount": "1/2",
+          "unit": "tsp",
+          "item": "vanilla extract"
+        },
+        {
+          "amount": "1",
+          "unit": "pinch",
+          "item": "salt"
+        }
+      ]
+    },
+    {
+      "rating": 5,
+      "source": "",
+      "source_url": "",
+      "instructions": "1. Marinate steak in olive oil, garlic, cumin, chili powder, paprika, salt and pepper 30+ min.\n2. Grill 4–5 min per side. Rest 5 min, slice against the grain.\n3. Warm tortillas. Assemble with onion, cilantro, lime, salsa.",
+      "mark_new": false,
+      "id": 3,
+      "name": "Chipotle-Style Flank Steak for Bowls/Tacos",
+      "meal_type": "dinner",
+      "servings": 4,
+      "prep_time": "15 min",
+      "cook_time": "15 min",
+      "macros_per_serving": {
+        "fiber_g": 2,
+        "calories": 387,
+        "protein_g": 48,
+        "carbs_g": 8,
+        "fat_g": 18
+      },
+      "tags": [],
+      "added_at": "2026-05-15T15:13:54.367Z",
+      "ingredients": [
+        {
+          "amount": "2",
+          "unit": "lb",
+          "item": "flank steak"
+        },
+        {
+          "amount": "1/3",
+          "unit": "cup",
+          "item": "lime juice"
+        },
+        {
+          "amount": "3",
+          "unit": "cloves",
+          "item": "garlic"
+        },
+        {
+          "amount": "2",
+          "unit": "tbsp",
+          "item": "WF 365 olive oil"
+        },
+        {
+          "amount": "2",
+          "unit": "tsp",
+          "item": "cumin"
+        },
+        {
+          "amount": "2",
+          "unit": "tsp",
+          "item": "chili powder"
+        },
+        {
+          "amount": "2",
+          "unit": "tsp",
+          "item": "smoked paprika"
+        },
+        {
+          "amount": "1",
+          "unit": "tsp",
+          "item": "salt"
+        },
+        {
+          "amount": "1",
+          "unit": "unit",
+          "item": "sliced white onion"
+        },
+        {
+          "amount": "1/2",
+          "unit": "cup",
+          "item": "salsa"
+        },
+        {
+          "amount": "1",
+          "unit": "can",
+          "item": "green chilis"
+        }
+      ]
+    },
+    {
+      "rating": 3,
+      "source": "",
+      "source_url": "",
+      "instructions": "1. Slice and toast bagel.\n2. Spread 1.5 tbsp cream cheese on each half.",
+      "mark_new": false,
+      "id": 4,
+      "name": "Dave's Everything Bagel with Cream Cheese",
+      "meal_type": "breakfast",
+      "servings": 1,
+      "prep_time": "2 min",
+      "cook_time": "0 min",
+      "macros_per_serving": {
+        "fiber_g": 5,
+        "calories": 390,
+        "protein_g": 16,
+        "carbs_g": 48,
+        "fat_g": 14
+      },
+      "tags": [],
+      "added_at": "2026-04-30T15:13:54.367Z",
+      "ingredients": [
+        {
+          "amount": "1",
+          "unit": "",
+          "item": "Dave's Killer Bread everything bagel"
+        },
+        {
+          "amount": "3",
+          "unit": "tbsp",
+          "item": "Good Culture probiotic cream cheese"
+        }
+      ]
+    },
+    {
+      "rating": 1,
+      "source": "Instagram @just.ingredients",
+      "source_url": "",
+      "instructions": "Chia base:\n1. Mix chia seeds, yogurt, protein powder, milk, vanilla, maple syrup, salt, cinnamon in containers.\n2. Refrigerate 1 hr, stir, then refrigerate overnight.\n\nCaramelized apples:\n1. Cook diced apples with water on medium ~10 min until soft.\n2. Add cinnamon and maple syrup at the end.\n3. Cool and spoon over pudding before serving.",
+      "mark_new": true,
+      "id": 5,
+      "name": "Apple Pie Protein Chia Pudding",
+      "meal_type": "breakfast",
+      "servings": 4,
+      "prep_time": "15 min",
+      "cook_time": "10 min",
+      "macros_per_serving": {
+        "fiber_g": 8,
+        "calories": 320,
+        "protein_g": 22,
+        "carbs_g": 42,
+        "fat_g": 7
+      },
+      "tags": [],
+      "added_at": "2026-06-24T15:13:54.367Z",
+      "ingredients": [
+        {
+          "amount": "2",
+          "unit": "tbsp",
+          "item": "WF 365 chia seeds"
+        },
+        {
+          "amount": "1/2",
+          "unit": "cup",
+          "item": "WF 365 Greek whole milk yogurt"
+        },
+        {
+          "amount": "1",
+          "unit": "scoop",
+          "item": "vanilla protein powder (Just Ingredients)"
+        },
+        {
+          "amount": "1/4",
+          "unit": "cup",
+          "item": "milk"
+        },
+        {
+          "amount": "1",
+          "unit": "tsp",
+          "item": "vanilla extract"
+        },
+        {
+          "amount": "1",
+          "unit": "tbsp",
+          "item": "WF 365 maple syrup"
+        },
+        {
+          "amount": "1",
+          "unit": "pinch",
+          "item": "cinnamon"
+        },
+        {
+          "amount": "5-6",
+          "unit": "",
+          "item": "apples, diced"
+        },
+        {
+          "amount": "1/2",
+          "unit": "cup",
+          "item": "water"
+        },
+        {
+          "amount": "1",
+          "unit": "tbsp",
+          "item": "WF 365 honey"
+        },
+        {
+          "amount": "1",
+          "unit": "tbsp",
+          "item": "cinnamon"
+        }
+      ]
+    },
+    {
+      "rating": 4,
+      "source": "",
+      "source_url": "",
+      "instructions": "1. Cook rice per package.\n2. Heat meatballs in skillet or air fryer.\n3. Steam snap peas 3–4 min.\n4. Toss meatballs with soyaki sauce.\n5. Serve over rice with snap peas.",
+      "mark_new": false,
+      "id": 6,
+      "name": "Chicken Meatball Soyaki Rice Bowl",
+      "meal_type": "dinner",
+      "servings": 2,
+      "prep_time": "5 min",
+      "cook_time": "20 min",
+      "macros_per_serving": {
+        "fiber_g": 4,
+        "calories": 490,
+        "protein_g": 34,
+        "carbs_g": 58,
+        "fat_g": 10
+      },
+      "tags": [],
+      "added_at": "2026-06-04T15:13:54.367Z",
+      "ingredients": [
+        {
+          "amount": "12",
+          "unit": "oz",
+          "item": "Amylu chicken meatballs"
+        },
+        {
+          "amount": "3",
+          "unit": "tbsp",
+          "item": "soyaki sauce (Trader Joe's)"
+        },
+        {
+          "amount": "1",
+          "unit": "cup dry",
+          "item": "WF 365 white rice"
+        },
+        {
+          "amount": "2",
+          "unit": "cups",
+          "item": "sugar snap peas"
+        }
+      ]
+    },
+    {
+      "rating": 5,
+      "source": "NYT Cooking",
+      "source_url": "https://cooking.nytimes.com/recipes/1019693-slow-cooker-chipotle-honey-chicken-tacos",
+      "instructions": "1. Add chicken to slow cooker.\n2. Blend chipotles, honey, garlic, lime, cumin, paprika, salt and pepper. Pour over chicken.\n3. Cook low 4 hrs or high 2 hrs. Shred and toss in juices.\n4. Cook Spanish rice. Heat beans.\n5. Serve chicken over rice and beans.",
+      "mark_new": false,
+      "id": 7,
+      "name": "Chipotle Honey Chicken with Spanish Rice & Beans",
+      "meal_type": "lunch",
+      "servings": 6,
+      "prep_time": "15 min",
+      "cook_time": "4 hrs",
+      "macros_per_serving": {
+        "fiber_g": 8,
+        "calories": 520,
+        "protein_g": 38,
+        "carbs_g": 52,
+        "fat_g": 12
+      },
+      "tags": [],
+      "added_at": "2026-05-25T15:13:54.367Z",
+      "ingredients": [
+        {
+          "amount": "2",
+          "unit": "lb",
+          "item": "chicken thighs"
+        },
+        {
+          "amount": "2",
+          "unit": "",
+          "item": "chipotle peppers in adobo"
+        },
+        {
+          "amount": "3",
+          "unit": "tbsp",
+          "item": "WF 365 honey"
+        },
+        {
+          "amount": "4",
+          "unit": "cloves",
+          "item": "garlic"
+        },
+        {
+          "amount": "2",
+          "unit": "",
+          "item": "lime"
+        },
+        {
+          "amount": "1",
+          "unit": "tsp",
+          "item": "cumin"
+        },
+        {
+          "amount": "1",
+          "unit": "tsp",
+          "item": "smoked paprika"
+        },
+        {
+          "amount": "",
+          "unit": "to taste",
+          "item": "salt & pepper"
+        },
+        {
+          "amount": "2",
+          "unit": "cups dry",
+          "item": "Spanish rice"
+        },
+        {
+          "amount": "1",
+          "unit": "can",
+          "item": "WF 365 black beans"
+        },
+        {
+          "amount": "1",
+          "unit": "cup",
+          "item": "WF 365 chicken broth"
+        }
+      ]
+    },
+    {
+      "rating": 4,
+      "source": "",
+      "source_url": "",
+      "instructions": "1. Marinate chicken in Greek yogurt and seasoning 30+ min.\n2. Grill or sear 6–7 min per side. Rest and slice.\n3. Grill eggplant slices brushed with olive oil.\n4. Cook couscous per package.\n5. Assemble bowls with all components.",
+      "mark_new": false,
+      "id": 8,
+      "name": "Greek Chicken Bowls",
+      "meal_type": "dinner",
+      "servings": 4,
+      "prep_time": "20 min",
+      "cook_time": "20 min",
+      "macros_per_serving": {
+        "fiber_g": 5,
+        "calories": 540,
+        "protein_g": 42,
+        "carbs_g": 38,
+        "fat_g": 20
+      },
+      "tags": [],
+      "added_at": "2026-05-10T15:13:54.367Z",
+      "ingredients": [
+        {
+          "amount": "1.5",
+          "unit": "lb",
+          "item": "chicken thighs"
+        },
+        {
+          "amount": "1/2",
+          "unit": "cup",
+          "item": "WF 365 Greek yogurt"
+        },
+        {
+          "amount": "2",
+          "unit": "tbsp",
+          "item": "Greek seasoning"
+        },
+        {
+          "amount": "1",
+          "unit": "large",
+          "item": "eggplant"
+        },
+        {
+          "amount": "1",
+          "unit": "cup dry",
+          "item": "couscous"
+        },
+        {
+          "amount": "1/2",
+          "unit": "cup",
+          "item": "Whole Foods tzatziki sauce"
+        },
+        {
+          "amount": "1/4",
+          "unit": "cup",
+          "item": "WF 365 hummus"
+        },
+        {
+          "amount": "1/4",
+          "unit": "cup",
+          "item": "WF 365 olives"
+        },
+        {
+          "amount": "1/4",
+          "unit": "cup",
+          "item": "feta crumbles"
+        },
+        {
+          "amount": "2",
+          "unit": "tbsp",
+          "item": "WF 365 olive oil"
+        }
+      ]
+    },
+    {
+      "rating": 5,
+      "source": "Instagram",
+      "source_url": "",
+      "instructions": "1. Cook glass noodles, rinse cold, toss with sesame oil.\n2. Cook and slice chicken.\n3. Whisk sauce: coconut aminos, peanut butter, sesame oil, ACV, maple syrup, garlic powder, ginger, sriracha, water.\n4. Assemble bowls with all veggies and toppings.\n5. Drizzle sauce over and toss.",
+      "mark_new": true,
+      "id": 9,
+      "name": "Peanut Sesame Glass Noodle Bowl",
+      "meal_type": "lunch",
+      "servings": 3,
+      "prep_time": "15 min",
+      "cook_time": "10 min",
+      "macros_per_serving": {
+        "fiber_g": 4,
+        "calories": 480,
+        "protein_g": 32,
+        "carbs_g": 48,
+        "fat_g": 16
+      },
+      "tags": [],
+      "added_at": "2026-06-22T15:13:54.367Z",
+      "ingredients": [
+        {
+          "amount": "1",
+          "unit": "lb",
+          "item": "chicken breast"
+        },
+        {
+          "amount": "6",
+          "unit": "oz",
+          "item": "glass noodles"
+        },
+        {
+          "amount": "2",
+          "unit": "",
+          "item": "carrots, ribboned"
+        },
+        {
+          "amount": "1",
+          "unit": "cup",
+          "item": "bean sprouts"
+        },
+        {
+          "amount": "1",
+          "unit": "",
+          "item": "red bell pepper"
+        },
+        {
+          "amount": "3",
+          "unit": "stalks",
+          "item": "green onion"
+        },
+        {
+          "amount": "1/4",
+          "unit": "cup",
+          "item": "cilantro"
+        },
+        {
+          "amount": "1/4",
+          "unit": "cup",
+          "item": "cashews, crushed"
+        },
+        {
+          "amount": "1",
+          "unit": "",
+          "item": "lime"
+        },
+        {
+          "amount": "3",
+          "unit": "tbsp",
+          "item": "coconut aminos"
+        },
+        {
+          "amount": "2",
+          "unit": "tbsp",
+          "item": "peanut butter"
+        },
+        {
+          "amount": "3",
+          "unit": "tsp",
+          "item": "sesame oil"
+        },
+        {
+          "amount": "1",
+          "unit": "tbsp",
+          "item": "apple cider vinegar"
+        },
+        {
+          "amount": "1",
+          "unit": "tbsp",
+          "item": "WF 365 maple syrup"
+        },
+        {
+          "amount": "1/2",
+          "unit": "tsp",
+          "item": "garlic powder"
+        },
+        {
+          "amount": "1/4",
+          "unit": "tsp",
+          "item": "ginger"
+        },
+        {
+          "amount": "1",
+          "unit": "tbsp",
+          "item": "sriracha"
+        },
+        {
+          "amount": "2-4",
+          "unit": "tbsp",
+          "item": "water"
+        }
+      ]
+    },
+    {
+      "rating": 0,
+      "source": "WF 365",
+      "source_url": "",
+      "instructions": "1. Heat 2 tbsp olive oil in a dutch oven or soup pot over medium heat. Season chicken with 1 tsp salt and pepper. Sear chicken for 1-2 min each side until golden brown but not cooked through. Set aside.\n2. Add remaining 1 tbsp olive oil. Add onion, garlic, and carrots. Season with 1 tsp salt and pepper. Stir for about 5 minutes until onions begin to brown.\n3. Add orzo, dill, parsley, and oregano. Stir for about 1 minute.\n4. Add chicken broth and chicken back in. Bring to a boil, cover and simmer for 15 minutes until chicken is cooked through.\n5. Set aside 1 cup of hot broth and slowly add it to egg yolks 1 tbsp at a time while whisking vigorously to temper the eggs.\n6. Remove chicken, shred it, and add back in along with lemon juice and egg yolk mixture.\n7. Add more salt and pepper to taste. Serve topped with fresh parsley, dill, and a drizzle of olive oil.",
+      "mark_new": true,
+      "id": 1782746536950,
+      "name": "Lemon Chicken Orzo Soup",
+      "meal_type": "dinner",
+      "servings": 6,
+      "prep_time": "15 min",
+      "cook_time": "35 min",
+      "macros_per_serving": {
+        "fiber_g": 2,
+        "calories": 320,
+        "protein_g": 28,
+        "carbs_g": 24,
+        "fat_g": 11
+      },
+      "ingredients": [
+        {
+          "amount": "3",
+          "unit": "tbsp",
+          "item": "olive oil"
+        },
+        {
+          "amount": "1",
+          "unit": "lb",
+          "item": "chicken breasts"
+        },
+        {
+          "amount": "2",
+          "unit": "tsp",
+          "item": "salt and pepper"
+        },
+        {
+          "amount": "1",
+          "unit": "medium",
+          "item": "yellow onion"
+        },
+        {
+          "amount": "2",
+          "unit": "medium",
+          "item": "carrots"
+        },
+        {
+          "amount": "4",
+          "unit": "cloves",
+          "item": "garlic cloves"
+        },
+        {
+          "amount": "1",
+          "unit": "cup",
+          "item": "uncooked orzo"
+        },
+        {
+          "amount": "2",
+          "unit": "tbsp",
+          "item": "fresh dill"
+        },
+        {
+          "amount": "2",
+          "unit": "tbsp",
+          "item": "fresh parsley"
+        },
+        {
+          "amount": "1",
+          "unit": "tbsp",
+          "item": "fresh oregano"
+        },
+        {
+          "amount": "8",
+          "unit": "cups",
+          "item": "chicken broth"
+        },
+        {
+          "amount": "3",
+          "unit": "large",
+          "item": "egg yolks"
+        },
+        {
+          "amount": "2",
+          "unit": "lemons",
+          "item": "lemon juice"
+        }
+      ],
+      "tags": [
+        "soup",
+        "greek-inspired",
+        "lemon",
+        "chicken",
+        "comfort food",
+        "meal prep"
+      ],
+      "added_at": "2026-06-29T15:22:16.950Z"
+    },
+    {
+      "rating": 0,
+      "source": "WF 365",
+      "source_url": "",
+      "instructions": "1. Slice apple into wedges\n2. Serve with peanut butter for dipping",
+      "mark_new": true,
+      "id": 1782848922783,
+      "name": "Peanut Butter and Apple",
+      "meal_type": "snack",
+      "servings": 1,
+      "prep_time": "2 min",
+      "cook_time": "0 min",
+      "macros_per_serving": {
+        "fiber_g": 4,
+        "calories": 190,
+        "protein_g": 4,
+        "carbs_g": 27,
+        "fat_g": 8
+      },
+      "ingredients": [
+        {
+          "amount": "1",
+          "unit": "tbsp",
+          "item": "peanut butter"
+        },
+        {
+          "amount": "1",
+          "unit": "medium",
+          "item": "apple"
+        }
+      ],
+      "tags": [
+        "no-cook",
+        "quick",
+        "healthy",
+        "vegan",
+        "gluten-free"
+      ],
+      "added_at": "2026-06-30T19:48:42.783Z"
+    },
+    {
+      "rating": 0,
+      "source": "WF 365",
+      "source_url": "",
+      "instructions": "1. Rinse rice under cold water.\n2. Add rice and 1 cup water to a small saucepan and bring to a boil.\n3. Reduce heat to low, cover, and simmer for 18 minutes.\n4. Remove from heat and let sit covered for 5 minutes, then fluff with a fork.",
+      "mark_new": true,
+      "id": 1782848933332,
+      "name": "White Rice",
+      "meal_type": "side",
+      "servings": 2,
+      "prep_time": "2 min",
+      "cook_time": "18 min",
+      "macros_per_serving": {
+        "fiber_g": 0,
+        "calories": 171,
+        "protein_g": 3,
+        "carbs_g": 37,
+        "fat_g": 0
+      },
+      "ingredients": [
+        {
+          "amount": "0.5",
+          "unit": "cup",
+          "item": "white rice"
+        }
+      ],
+      "tags": [
+        "vegan",
+        "gluten-free",
+        "simple"
+      ],
+      "added_at": "2026-06-30T19:48:53.332Z"
+    },
+    {
+      "rating": 0,
+      "source": "WF 365",
+      "source_url": "",
+      "instructions": "1. Bring a pot of salted water to a boil.\n2. Add dry pasta and cook according to package directions, about 8-10 minutes until al dente.\n3. Drain and serve.",
+      "mark_new": true,
+      "id": 1782848946645,
+      "name": "Plain Pasta",
+      "meal_type": "side",
+      "servings": 1,
+      "prep_time": "5 min",
+      "cook_time": "10 min",
+      "macros_per_serving": {
+        "fiber_g": 2,
+        "calories": 200,
+        "protein_g": 7,
+        "carbs_g": 40,
+        "fat_g": 1
+      },
+      "tags": [
+        "simple",
+        "vegetarian",
+        "vegan"
+      ],
+      "pairings": "",
+      "added_at": "2026-06-30T19:49:06.645Z",
+      "ingredients": [
+        {
+          "amount": "56",
+          "unit": "g",
+          "item": "dry pasta"
+        }
+      ]
+    },
+    {
+      "rating": 0,
+      "source": "WF 365",
+      "source_url": "",
+      "instructions": "1. Preheat the oven to 180 degrees C.\n2. In a large baking dish, add the feta, chicken breasts, cherry tomatoes, diced garlic, chipotle paste, olive oil, salt and pepper.\n3. Bake in the oven for 30 minutes.\n4. Once baked, shred the chicken and mix everything together into a sauce.\n5. While the chicken is baking, cook the orzo as per packet instructions.\n6. Drain the orzo and add it to the sauce.\n7. Serve and enjoy!",
+      "mark_new": true,
+      "id": 1782868413068,
+      "name": "Chipotle Feta Baked Chicken with Orzo",
+      "meal_type": "dinner",
+      "servings": 2,
+      "prep_time": "10 min",
+      "cook_time": "35 min",
+      "macros_per_serving": {
+        "fiber_g": 4,
+        "calories": 620,
+        "protein_g": 52,
+        "carbs_g": 58,
+        "fat_g": 18
+      },
+      "ingredients": [
+        {
+          "amount": "200",
+          "unit": "g",
+          "item": "feta cheese"
+        },
+        {
+          "amount": "2",
+          "unit": "whole",
+          "item": "chicken breasts"
+        },
+        {
+          "amount": "200",
+          "unit": "g",
+          "item": "cherry tomatoes"
+        },
+        {
+          "amount": "2",
+          "unit": "whole",
+          "item": "garlic cloves, diced"
+        },
+        {
+          "amount": "1",
+          "unit": "tbsp",
+          "item": "extra virgin olive oil"
+        },
+        {
+          "amount": "3",
+          "unit": "tsp",
+          "item": "chipotle paste"
+        },
+        {
+          "amount": "1",
+          "unit": "pinch",
+          "item": "salt and pepper"
+        },
+        {
+          "amount": "160",
+          "unit": "g",
+          "item": "orzo, dry weight"
+        }
+      ],
+      "tags": [
+        "high protein",
+        "baked",
+        "mediterranean",
+        "chipotle"
+      ],
+      "added_at": "2026-07-01T01:13:33.068Z"
+    }
+  ],
+  "calendar": {
+    "emma": {
+      "Mon-Lunch": {
+        "ids": [
+          9
+        ],
+        "skip": false
+      },
+      "Mon-Breakfast": {
+        "ids": [
+          4
+        ],
+        "skip": false
+      },
+      "Mon-Dinner": {
+        "ids": [
+          1782868413068,
+          1782848933332
+        ],
+        "skip": false
+      },
+      "Tue-Breakfast": {
+        "ids": [
+          2
+        ],
+        "skip": false
+      },
+      "Tue-Lunch": {
+        "ids": [
+          7,
+          1782848946645
+        ],
+        "skip": false
+      },
+      "Tue-Dinner": {
+        "ids": [
+          1782868413068,
+          1782848933332
+        ],
+        "skip": false
+      },
+      "Wed-Breakfast": {
+        "ids": [
+          5
+        ],
+        "skip": false
+      },
+      "Wed-Lunch": {
+        "ids": [
+          7,
+          1782848946645
+        ],
+        "skip": false
+      },
+      "Wed-Dinner": {
+        "ids": [
+          1782868413068,
+          1782848933332
+        ],
+        "skip": false
+      },
+      "Thu-Breakfast": {
+        "ids": [
+          4
+        ],
+        "skip": false
+      },
+      "Thu-Lunch": {
+        "ids": [
+          7,
+          1782848946645
+        ],
+        "skip": false
+      },
+      "Thu-Dinner": {
+        "ids": [
+          8,
+          1782848933332
+        ],
+        "skip": false
+      },
+      "Fri-Breakfast": {
+        "ids": [
+          2
+        ],
+        "skip": false
+      },
+      "Fri-Lunch": {
+        "ids": [
+          9,
+          1782848946645
+        ],
+        "skip": false
+      },
+      "Fri-Dinner": {
+        "ids": [
+          8,
+          1782848933332
+        ],
+        "skip": false
+      },
+      "Sat-Breakfast": {
+        "ids": [
+          5
+        ],
+        "skip": false
+      },
+      "Sat-Lunch": {
+        "ids": [
+          9,
+          1782848946645
+        ],
+        "skip": false
+      },
+      "Sat-Dinner": {
+        "ids": [
+          8,
+          1782848933332
+        ],
+        "skip": false
+      },
+      "Sun-Breakfast": {
+        "ids": [
+          4
+        ],
+        "skip": false
+      },
+      "Sun-Lunch": {
+        "ids": [
+          7,
+          1782848946645
+        ],
+        "skip": false
+      },
+      "Sun-Dinner": {
+        "ids": [
+          1,
+          1782848933332
+        ],
+        "skip": false
+      }
+    },
+    "seth": {}
+  },
+  "prep_plan": null,
+  "exported": "2026-07-01T18:36:34.368Z"
+}
